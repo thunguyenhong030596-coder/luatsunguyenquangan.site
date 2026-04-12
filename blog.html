@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Blog pháp lý – Luật sư Nguyễn Quảng An. Cập nhật kiến thức pháp luật thực tế về tranh chấp ngân hàng, đất đai, hôn nhân tại TP.HCM.">
+<title>Blog Pháp Lý | Luật sư Nguyễn Quảng An</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--crimson:#7B1113;--crimson-dark:#5A0C0E;--crimson-deep:#3D0708;--crimson-light:#FDECEA;--gold:#C8972A;--gold-light:#F5EDD8;--cream:#FAFAF7;--white:#fff;--text:#1C1C2E;--muted:#6B7280;--border:#E5E7EB}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:'Inter',sans-serif;background:var(--white);color:var(--text);font-size:16px;line-height:1.7}
+a{text-decoration:none;color:inherit}
+
+/* NAV */
+nav{padding:18px 48px;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid var(--border);position:sticky;top:0;background:rgba(255,255,255,0.97);backdrop-filter:blur(8px);box-shadow:0 1px 12px rgba(0,0,0,0.06);z-index:100}
+.logo{display:flex;align-items:center;gap:10px}
+.logo-text{font-family:'Cormorant Garamond',serif;font-size:20px;font-weight:700;color:var(--crimson)}
+.logo-text em{color:var(--gold);font-style:normal}
+.nav-links{display:flex;gap:28px;align-items:center}
+.nav-links a{font-size:14px;color:var(--muted);font-weight:500;transition:color .2s}
+.nav-links a:hover{color:var(--crimson)}
+.nav-links a.active{color:var(--crimson);font-weight:600}
+.nav-btn{background:var(--crimson);color:#fff!important;padding:10px 22px;border-radius:7px;font-size:14px;font-weight:600;transition:background .2s;box-shadow:0 2px 8px rgba(123,17,19,0.25)}
+.nav-btn:hover{background:var(--crimson-dark)!important}
+
+/* HERO */
+.blog-hero{background:linear-gradient(135deg,var(--crimson-deep) 0%,var(--crimson) 100%);padding:64px 48px;text-align:center}
+.blog-hero-tag{font-size:11px;color:var(--gold);letter-spacing:2px;text-transform:uppercase;font-weight:700;margin-bottom:14px}
+.blog-hero h1{font-family:'Cormorant Garamond',serif;font-size:48px;font-weight:700;color:#fff;margin-bottom:14px;line-height:1.15}
+.blog-hero p{font-size:16px;color:rgba(255,255,255,0.75);max-width:540px;margin:0 auto}
+
+/* FILTERS */
+.filters{padding:28px 48px;border-bottom:1px solid var(--border);display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+.filter-label{font-size:13px;color:var(--muted);font-weight:500;margin-right:6px}
+.filter-btn{padding:7px 18px;border-radius:20px;font-size:13px;font-weight:500;border:1px solid var(--border);color:var(--muted);cursor:pointer;transition:all .2s;background:#fff}
+.filter-btn:hover,.filter-btn.active{background:var(--crimson);color:#fff;border-color:var(--crimson)}
+
+/* POSTS GRID */
+.posts-wrap{padding:48px;max-width:1200px;margin:0 auto}
+.posts-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+
+/* POST CARD */
+.post-card{background:#fff;border:1px solid var(--border);border-radius:14px;overflow:hidden;transition:box-shadow .25s,transform .25s;display:flex;flex-direction:column}
+.post-card:hover{box-shadow:0 8px 32px rgba(0,0,0,0.1);transform:translateY(-4px)}
+.post-thumb{height:200px;overflow:hidden;position:relative;background:linear-gradient(135deg,var(--crimson-light),var(--gold-light))}
+.post-thumb img{width:100%;height:100%;object-fit:cover;transition:transform .3s}
+.post-card:hover .post-thumb img{transform:scale(1.05)}
+.post-thumb-placeholder{width:100%;height:100%;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:10px}
+.post-thumb-placeholder svg{width:48px;height:48px;fill:var(--crimson);opacity:.35}
+.post-thumb-placeholder span{font-family:'Cormorant Garamond',serif;font-size:13px;color:var(--crimson);opacity:.5;font-style:italic}
+.post-category{position:absolute;top:14px;left:14px;background:var(--crimson);color:#fff;font-size:10px;font-weight:700;padding:4px 12px;border-radius:20px;letter-spacing:.8px;text-transform:uppercase}
+.post-body{padding:22px 24px;display:flex;flex-direction:column;flex:1}
+.post-title{font-family:'Cormorant Garamond',serif;font-size:20px;font-weight:700;color:var(--crimson-deep);line-height:1.35;margin-bottom:10px}
+.post-title a:hover{color:var(--crimson)}
+.post-excerpt{font-size:13.5px;color:var(--muted);line-height:1.7;flex:1;margin-bottom:16px}
+.post-meta{display:flex;align-items:center;justify-content:space-between;padding-top:14px;border-top:1px solid var(--border)}
+.post-date{font-size:11px;color:var(--muted);display:flex;align-items:center;gap:5px}
+.post-date svg{width:12px;height:12px;fill:var(--muted)}
+.post-read{font-size:12px;color:var(--crimson);font-weight:600;display:flex;align-items:center;gap:4px}
+.post-read svg{width:12px;height:12px;fill:var(--crimson)}
+
+/* FEATURED POST */
+.featured-post{background:#fff;border:1px solid var(--border);border-radius:14px;overflow:hidden;display:grid;grid-template-columns:1fr 1fr;margin-bottom:32px;transition:box-shadow .25s}
+.featured-post:hover{box-shadow:0 8px 32px rgba(0,0,0,0.1)}
+.featured-thumb{height:280px;background:linear-gradient(135deg,var(--crimson-light),var(--gold-light));display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden}
+.featured-thumb img{width:100%;height:100%;object-fit:cover}
+.featured-category{position:absolute;top:16px;left:16px;background:var(--gold);color:var(--crimson-deep);font-size:10px;font-weight:700;padding:5px 14px;border-radius:20px;letter-spacing:.8px;text-transform:uppercase}
+.featured-badge{position:absolute;top:16px;right:16px;background:var(--crimson);color:#fff;font-size:10px;font-weight:700;padding:5px 12px;border-radius:20px}
+.featured-body{padding:36px}
+.featured-tag{font-size:11px;color:var(--crimson);font-weight:700;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:12px}
+.featured-title{font-family:'Cormorant Garamond',serif;font-size:28px;font-weight:700;color:var(--crimson-deep);line-height:1.25;margin-bottom:14px}
+.featured-excerpt{font-size:14px;color:var(--muted);line-height:1.8;margin-bottom:24px}
+.btn-read{display:inline-flex;align-items:center;gap:8px;background:var(--crimson);color:#fff;padding:12px 24px;border-radius:7px;font-size:14px;font-weight:600;transition:background .2s;box-shadow:0 2px 8px rgba(123,17,19,0.25)}
+.btn-read:hover{background:var(--crimson-dark)}
+.btn-read svg{width:14px;height:14px;fill:#fff}
+
+/* CTA STRIP */
+.cta-strip{background:var(--crimson-deep);padding:48px;margin-top:48px;border-radius:14px;display:flex;justify-content:space-between;align-items:center;gap:24px;flex-wrap:wrap}
+.cta-strip h3{font-family:'Cormorant Garamond',serif;font-size:28px;font-weight:700;color:#fff}
+.cta-strip p{font-size:14px;color:rgba(255,255,255,0.7);margin-top:6px}
+.cta-strip a{background:var(--gold);color:var(--crimson-deep);padding:13px 28px;border-radius:7px;font-size:14px;font-weight:700;white-space:nowrap;transition:background .2s}
+.cta-strip a:hover{background:#E8C870}
+
+/* ARTICLE PAGE */
+.article-wrap{max-width:760px;margin:0 auto;padding:56px 48px}
+.article-header{margin-bottom:36px}
+.article-cat{font-size:11px;color:var(--crimson);font-weight:700;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:12px}
+.article-title{font-family:'Cormorant Garamond',serif;font-size:42px;font-weight:700;color:var(--crimson-deep);line-height:1.2;margin-bottom:16px}
+.article-meta{display:flex;align-items:center;gap:16px;font-size:13px;color:var(--muted);padding-bottom:24px;border-bottom:1px solid var(--border)}
+.article-body{font-size:16px;line-height:1.9;color:#374151}
+.article-body h2{font-family:'Cormorant Garamond',serif;font-size:28px;font-weight:700;color:var(--crimson-deep);margin:36px 0 14px}
+.article-body h3{font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:700;color:var(--crimson-deep);margin:28px 0 10px}
+.article-body p{margin-bottom:18px}
+.article-body strong{color:var(--crimson-deep)}
+.article-body .highlight-box{background:var(--crimson-light);border-left:4px solid var(--crimson);padding:16px 20px;border-radius:0 8px 8px 0;margin:24px 0}
+.article-body .highlight-box p{margin-bottom:0;color:var(--crimson-dark);font-weight:500}
+.article-cta{background:var(--crimson-deep);padding:32px;border-radius:12px;margin-top:48px;text-align:center}
+.article-cta h3{font-family:'Cormorant Garamond',serif;font-size:24px;color:#fff;margin-bottom:8px}
+.article-cta p{font-size:14px;color:rgba(255,255,255,0.7);margin-bottom:20px}
+.article-cta a{background:var(--gold);color:var(--crimson-deep);padding:12px 28px;border-radius:7px;font-size:14px;font-weight:700}
+
+/* ADMIN NOTE */
+.admin-note{background:#FEF3C7;border:1px solid #F59E0B;border-radius:10px;padding:16px 20px;margin-bottom:28px;font-size:13px;color:#92400E;font-family:Inter,sans-serif}
+.admin-note strong{display:block;margin-bottom:4px;font-size:14px}
+
+footer{background:#1C1C2E;color:#9CA3AF;padding:36px 48px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;margin-top:0}
+.footer-copy{font-size:12px}
+.footer-back{font-size:13px;color:var(--gold)}
+
+/* FLOAT CHAT */
+.float-wrap{position:fixed;bottom:28px;right:24px;display:flex;flex-direction:column;gap:12px;z-index:99999}
+
+@media(max-width:768px){
+  nav{padding:14px 20px}
+  .blog-hero{padding:40px 20px}
+  .blog-hero h1{font-size:32px}
+  .filters{padding:16px 20px}
+  .posts-wrap{padding:24px 20px}
+  .posts-grid{grid-template-columns:1fr}
+  .featured-post{grid-template-columns:1fr}
+  .featured-thumb{height:200px}
+  .cta-strip{flex-direction:column;text-align:center;padding:32px 20px}
+  .article-wrap{padding:32px 20px}
+  .article-title{font-size:30px}
+  footer{padding:24px 20px;flex-direction:column;text-align:center}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="logo">
+    <svg width="32" height="32" viewBox="0 0 64 64" fill="none"><rect width="64" height="64" rx="8" fill="#7B1113"/><line x1="32" y1="12" x2="32" y2="52" stroke="#C8972A" stroke-width="2.5" stroke-linecap="round"/><line x1="16" y1="20" x2="48" y2="20" stroke="#C8972A" stroke-width="2.5" stroke-linecap="round"/><line x1="16" y1="20" x2="10" y2="32" stroke="#C8972A" stroke-width="2" stroke-linecap="round"/><line x1="16" y1="20" x2="22" y2="32" stroke="#C8972A" stroke-width="2" stroke-linecap="round"/><path d="M10 32 Q16 36 22 32" stroke="#C8972A" stroke-width="2" fill="none" stroke-linecap="round"/><line x1="48" y1="20" x2="42" y2="32" stroke="#C8972A" stroke-width="2" stroke-linecap="round"/><line x1="48" y1="20" x2="54" y2="32" stroke="#C8972A" stroke-width="2" stroke-linecap="round"/><path d="M42 32 Q48 36 54 32" stroke="#C8972A" stroke-width="2" fill="none" stroke-linecap="round"/><rect x="26" y="50" width="12" height="3" rx="1.5" fill="#C8972A"/></svg>
+    <div class="logo-text">LS. Nguyễn <em>Quảng An</em></div>
+  </div>
+  <div class="nav-links">
+    <a href="index.html">Trang chủ</a>
+    <a href="index.html#dich-vu">Dịch vụ</a>
+    <a href="blog.html" class="active">Blog pháp lý</a>
+    <a href="index.html#lien-he" class="nav-btn">Tư vấn ngay</a>
+  </div>
+</nav>
+
+<div class="blog-hero">
+  <div class="blog-hero-tag">Blog pháp lý</div>
+  <h1>Kiến thức pháp luật<br>thực tế từ tòa án</h1>
+  <p>Những bài viết từ kinh nghiệm xử lý hồ sơ thực tế — giúp anh/chị hiểu đúng quyền lợi trước khi đưa ra quyết định.</p>
+</div>
+
+<div class="filters">
+  <span class="filter-label">Chủ đề:</span>
+  <button class="filter-btn active" onclick="filterPosts('all',this)">Tất cả</button>
+  <button class="filter-btn" onclick="filterPosts('ngan-hang',this)">Ngân hàng & Tín dụng</button>
+  <button class="filter-btn" onclick="filterPosts('dat-dai',this)">Đất đai</button>
+  <button class="filter-btn" onclick="filterPosts('hon-nhan',this)">Hôn nhân & Ly hôn</button>
+  <button class="filter-btn" onclick="filterPosts('hinh-su',this)">Hình sự & Lao động</button>
+</div>
+
+<div class="posts-wrap">
+
+  <!-- ADMIN NOTE – XÓA KHI ĐÃ HIỂU CÁCH DÙNG -->
+  <div class="admin-note">
+    <strong>📌 Hướng dẫn đăng bài mới (chỉ luật sư An thấy khi sửa file):</strong>
+    Sao chép một khối &lt;article&gt; bên dưới → đổi tiêu đề, nội dung, danh mục, ngày. Mỗi bài là 1 file HTML riêng đặt trong thư mục /bai-viet/ rồi link vào đây. Xem hướng dẫn chi tiết cuối trang.
+  </div>
+
+  <!-- BÀI NỔI BẬT -->
+  <div class="featured-post" data-cat="ngan-hang">
+    <div class="featured-thumb">
+      <img src="https://images.unsplash.com/photo-1479142506502-19b3a3b7ff33?w=800&h=500&fit=crop&crop=center" alt="Tòa án - pháp lý" loading="lazy">
+      <div class="featured-category">Ngân hàng</div>
+      <div class="featured-badge">⭐ Nổi bật</div>
+    </div>
+    <div class="featured-body">
+      <div class="featured-tag">Phải đọc ngay</div>
+      <div class="featured-title">Bị ngân hàng gửi giấy triệu tập — 5 điều phải biết trước khi ký bất kỳ văn bản nào</div>
+      <div class="featured-excerpt">Nhiều người hoảng loạn khi nhận giấy triệu tập từ ngân hàng và vội ký hết giấy tờ họ đưa ra. Đây là sai lầm nghiêm trọng có thể mất đi quyền phản đối về sau. Bài viết này giải thích rõ anh/chị được quyền làm gì và không nên làm gì trong 48 giờ đầu.</div>
+      <a href="bai-viet/ngan-hang-trieu-tap.html" class="btn-read">
+        Đọc bài viết
+        <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </a>
+    </div>
+  </div>
+
+  <!-- LƯỚI BÀI VIẾT -->
+  <div class="posts-grid">
+
+    <article class="post-card" data-cat="ngan-hang">
+      <div class="post-thumb">
+        <img src="https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=600&h=300&fit=crop&crop=center" alt="Ngân hàng tín dụng" loading="lazy" style="width:100%;height:200px;object-fit:cover;display:block;">
+        <div class="post-category">Ngân hàng</div>
+      </div>
+      <div class="post-body">
+        <div class="post-title"><a href="bai-viet/thoi-hieu-kien-ngan-hang.html">Ngân hàng có thể kiện đòi nợ mãi mãi không? — Hiểu đúng về thời hiệu khởi kiện</a></div>
+        <div class="post-excerpt">Nhiều người không biết rằng ngân hàng chỉ có 3 năm để khởi kiện kể từ ngày đến hạn trả nợ. Nếu đã quá thời hạn này, bạn có quyền phản đối và tòa có thể bác đơn kiện.</div>
+        <div class="post-meta">
+          <div class="post-date"><svg viewBox="0 0 24 24"><path d="M8 2v3M16 2v3M3 8h18M5 4h14a2 2 0 012 2v14a2 2 0 01-2 2H5a2 2 0 01-2-2V6a2 2 0 012-2z"/></svg>12/04/2026</div>
+          <div class="post-read">Đọc tiếp <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div>
+        </div>
+      </div>
+    </article>
+
+    <article class="post-card" data-cat="dat-dai">
+      <div class="post-thumb">
+        <img src="https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=600&h=300&fit=crop&crop=center" alt="Đất đai bất động sản" loading="lazy" style="width:100%;height:200px;object-fit:cover;display:block;">
+        <div class="post-category">Đất đai</div>
+      </div>
+      <div class="post-body">
+        <div class="post-title"><a href="bai-viet/mua-dat-giay-tay.html">Mua đất giấy tay bên kia không chịu sang tên — có kiện được không?</a></div>
+        <div class="post-excerpt">Giao dịch mua bán đất bằng giấy tay không công chứng vẫn có thể được tòa công nhận nếu đáp ứng đủ điều kiện. Bài viết phân tích rõ khi nào kiện được và khi nào không.</div>
+        <div class="post-meta">
+          <div class="post-date"><svg viewBox="0 0 24 24"><path d="M8 2v3M16 2v3M3 8h18M5 4h14a2 2 0 012 2v14a2 2 0 01-2 2H5a2 2 0 01-2-2V6a2 2 0 012-2z"/></svg>10/04/2026</div>
+          <div class="post-read">Đọc tiếp <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div>
+        </div>
+      </div>
+    </article>
+
+    <article class="post-card" data-cat="hon-nhan">
+      <div class="post-thumb">
+        <img src="https://images.unsplash.com/photo-1450101499163-c8848c66ca85?w=600&h=300&fit=crop&crop=center" alt="Hôn nhân gia đình" loading="lazy" style="width:100%;height:200px;object-fit:cover;display:block;">
+        <div class="post-category">Hôn nhân</div>
+      </div>
+      <div class="post-body">
+        <div class="post-title"><a href="bai-viet/ly-hon-don-phuong.html">Vợ/chồng không chịu ly hôn — có bắt buộc được không và mất bao lâu?</a></div>
+        <div class="post-excerpt">Ly hôn đơn phương hoàn toàn có thể thực hiện được dù bên kia không đồng ý. Tòa sẽ chấp thuận nếu chứng minh được hôn nhân đã thực sự tan vỡ. Thủ tục khoảng 4–8 tháng.</div>
+        <div class="post-meta">
+          <div class="post-date"><svg viewBox="0 0 24 24"><path d="M8 2v3M16 2v3M3 8h18M5 4h14a2 2 0 012 2v14a2 2 0 01-2 2H5a2 2 0 01-2-2V6a2 2 0 012-2z"/></svg>08/04/2026</div>
+          <div class="post-read">Đọc tiếp <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div>
+        </div>
+      </div>
+    </article>
+
+  </div>
+
+  <!-- CTA STRIP -->
+  <div class="cta-strip">
+    <div>
+      <h3>Tình huống của anh/chị<br>có trong bài viết không?</h3>
+      <p>Nếu chưa thấy — hỏi trực tiếp luật sư Quảng An qua Zalo, phản hồi trong 30 phút.</p>
+    </div>
+    <a href="https://zalo.me/0777801708" target="_blank">Hỏi luật sư ngay →</a>
+  </div>
+
+</div>
+
+<footer>
+  <div class="footer-copy">© 2026 Luật sư Nguyễn Quảng An · Công ty Luật TNHH Bảo Vệ Công Lý</div>
+  <a href="index.html" class="footer-back">← Về trang chủ</a>
+</footer>
+
+<!-- FACEBOOK FEED SECTION -->
+<section style="padding:64px 48px;background:#FAFAF7;border-top:1px solid #E5E7EB;">
+  <div style="max-width:1200px;margin:0 auto;">
+    <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:36px;flex-wrap:wrap;gap:12px;">
+      <div>
+        <div style="font-size:11px;color:#7B1113;letter-spacing:2.5px;text-transform:uppercase;font-weight:700;font-family:Inter,sans-serif;margin-bottom:8px;">Mạng xã hội</div>
+        <div style="font-family:'Cormorant Garamond',serif;font-size:34px;font-weight:700;color:#3D0708;">Bài viết Facebook mới nhất</div>
+      </div>
+      <a href="https://www.facebook.com/profile.php?id=61588220735976" target="_blank"
+         style="font-family:Inter,sans-serif;font-size:14px;color:#7B1113;font-weight:600;display:flex;align-items:center;gap:6px;">
+        Xem tất cả trên Facebook →
+      </a>
+    </div>
+    <div style="display:flex;justify-content:center;">
+      <div id="fb-root"></div>
+      <div class="fb-page"
+           data-href="https://www.facebook.com/profile.php?id=61588220735976"
+           data-tabs="timeline"
+           data-width="1100"
+           data-height="600"
+           data-small-header="false"
+           data-adapt-container-width="true"
+           data-hide-cover="false"
+           data-show-facepile="true">
+        <blockquote cite="https://www.facebook.com/profile.php?id=61588220735976" class="fb-xfbml-parse-ignore">
+          <a href="https://www.facebook.com/profile.php?id=61588220735976">Luật sư Nguyễn Quảng An – Bảo Vệ Công Lý</a>
+        </blockquote>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Facebook SDK -->
+<script>
+window.fbAsyncInit = function() {
+  FB.init({ xfbml: true, version: 'v19.0' });
+};
+(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "https://connect.facebook.net/vi_VN/sdk.js";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));
+</script>
+
+<!-- FLOAT CHAT -->
+<div class="float-wrap">
+  <a href="https://zalo.me/0777801708" target="_blank" title="Chat Zalo"
+     style="width:54px;height:54px;border-radius:50%;background:#fff;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 16px rgba(0,104,255,0.35);overflow:hidden;">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/9/91/Icon_of_Zalo.svg" width="54" height="54" alt="Zalo" style="border-radius:50%">
+  </a>
+  <a href="https://m.me/61588220735976" target="_blank" title="Chat Messenger"
+     style="width:54px;height:54px;border-radius:50%;background:#fff;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 16px rgba(0,132,255,0.35);">
+    <svg width="36" height="36" viewBox="0 0 48 48"><defs><linearGradient id="g" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" style="stop-color:#0084FF"/><stop offset="100%" style="stop-color:#A033FF"/></linearGradient></defs><path fill="url(#g)" d="M24 4C12.95 4 4 13.4 4 24.8c0 6.1 2.5 11.55 6.56 15.4.34.3.54.73.55 1.18l.11 3.7a1.5 1.5 0 002.1 1.32l4.12-1.82c.35-.15.74-.18 1.11-.08A21.8 21.8 0 0024 45.6c11.05 0 20-9.4 20-20.8C44 13.4 35.05 4 24 4z"/><path fill="white" d="M36.34 20.38l-5.84 9.26a3 3 0 01-4.33.8l-4.65-3.48a1.2 1.2 0 00-1.44 0l-6.28 4.76c-.84.63-1.93-.36-1.38-1.26l5.84-9.26a3 3 0 014.33-.8l4.65 3.48a1.2 1.2 0 001.44 0l6.28-4.76c.84-.63 1.93.36 1.38 1.26z"/></svg>
+  </a>
+</div>
+
+<script>
+function filterPosts(cat, btn) {
+  document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  document.querySelectorAll('[data-cat]').forEach(el => {
+    el.style.display = (cat === 'all' || el.dataset.cat === cat) ? '' : 'none';
+  });
+}
+</script>
+
+</body>
+</html>
