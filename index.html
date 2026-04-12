@@ -1,0 +1,786 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Luật sư Nguyễn Quảng An - Tư vấn và đại diện pháp lý tại TP. Hồ Chí Minh. Tranh chấp ngân hàng, đất đai, hôn nhân, hình sự, lao động.">
+<title>Luật sư Nguyễn Quảng An | Tư vấn pháp lý TP. Hồ Chí Minh</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+.page-wrap{max-width:1280px;margin:0 auto;box-shadow:0 0 40px rgba(0,0,0,0.08);}
+:root {
+  --crimson: #7B1113;
+  --crimson-dark: #5A0C0E;
+  --crimson-deep: #3D0708;
+  --crimson-light: #FDECEA;
+  --gold: #C8972A;
+  --gold-light: #F5EDD8;
+  --gold-mid: #E8C870;
+  --cream: #FAFAF7;
+  --white: #FFFFFF;
+  --text: #1C1C2E;
+  --text-2: #4B5563;
+  --muted: #6B7280;
+  --border: #E5E7EB;
+  --border-2: #D1D5DB;
+  --shadow-sm: 0 1px 3px rgba(0,0,0,0.08);
+  --shadow-md: 0 4px 16px rgba(0,0,0,0.10);
+  --shadow-lg: 0 8px 32px rgba(0,0,0,0.13);
+  --radius: 12px;
+  --radius-sm: 7px;
+}
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; font-size: 16px; }
+body { font-family: 'Inter', sans-serif; background: var(--white); color: var(--text); line-height: 1.7; -webkit-font-smoothing: antialiased; }
+a { text-decoration: none; color: inherit; }
+img { max-width: 100%; display: block; }
+
+/* ── TOPBAR ── */
+.topbar {
+  background: var(--crimson-deep);
+  padding: 10px 48px;
+  display: flex; justify-content: space-between; align-items: center;
+}
+.topbar-left { font-size: 13px; color: #F5C6C6; letter-spacing: 0.3px; }
+.topbar-right { font-size: 13px; color: var(--gold); font-weight: 600; letter-spacing: 0.3px; }
+
+/* ── NAV ── */
+nav {
+  padding: 18px 48px;
+  display: flex; justify-content: space-between; align-items: center;
+  border-bottom: 1px solid var(--border);
+  position: sticky; top: 0; z-index: 200;
+  background: rgba(255,255,255,0.97);
+  backdrop-filter: blur(8px);
+  box-shadow: 0 1px 12px rgba(0,0,0,0.06);
+}
+.logo { display: flex; align-items: center; gap: 10px; }
+.logo-text { font-family: 'Cormorant Garamond', serif; font-size: 20px; font-weight: 700; color: var(--crimson); }
+.logo-text em { color: var(--gold); font-style: normal; }
+.nav-links { display: flex; gap: 28px; align-items: center; }
+.nav-links a { font-size: 14px; color: var(--muted); font-weight: 500; transition: color .2s; }
+.nav-links a:hover { color: var(--crimson); }
+.nav-btn {
+  background: var(--crimson); color: #fff !important;
+  padding: 10px 22px; border-radius: var(--radius-sm);
+  font-size: 14px; font-weight: 600;
+  transition: background .2s, transform .15s, box-shadow .2s;
+  box-shadow: 0 2px 8px rgba(123,17,19,0.25);
+}
+.nav-btn:hover { background: var(--crimson-dark) !important; transform: translateY(-1px); box-shadow: 0 4px 14px rgba(123,17,19,0.3); }
+.nav-toggle { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 4px; }
+.nav-toggle span { display: block; width: 24px; height: 2px; background: var(--crimson); border-radius: 2px; transition: .3s; }
+
+/* ── HERO ── */
+.hero {
+  display: grid; grid-template-columns: 1fr 300px;
+  min-height: 520px;
+  background: linear-gradient(135deg, #fff 55%, #FDF3F3 100%);
+  position: relative; overflow: hidden;
+}
+.hero::before {
+  content: '';
+  position: absolute; right: -80px; top: -80px;
+  width: 400px; height: 400px; border-radius: 50%;
+  background: radial-gradient(circle, rgba(123,17,19,0.05) 0%, transparent 70%);
+  pointer-events: none;
+}
+.hero::after {
+  content: '';
+  position: absolute; left: 40%; bottom: -60px;
+  width: 240px; height: 240px; border-radius: 50%;
+  background: radial-gradient(circle, rgba(200,151,42,0.07) 0%, transparent 70%);
+  pointer-events: none;
+}
+.hero-main { padding: 72px 56px; border-right: 1px solid var(--border); position: relative; z-index: 1; }
+.badge {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: var(--crimson-light); padding: 7px 16px; border-radius: 30px; margin-bottom: 28px;
+  border: 1px solid rgba(123,17,19,0.12);
+}
+.badge-dot { width: 7px; height: 7px; background: var(--crimson); border-radius: 50%; flex-shrink: 0; }
+.badge-text { font-size: 11px; color: var(--crimson); font-weight: 700; letter-spacing: 1.2px; text-transform: uppercase; }
+.hero h1 { font-family: 'Cormorant Garamond', serif; font-size: 68px; font-weight: 700; line-height: 1.05; color: var(--crimson-deep); margin-bottom: 10px; }
+.hero h1 span { color: var(--gold); }
+.hero-subtitle { font-size: 15px; color: var(--muted); margin-bottom: 20px; font-weight: 400; letter-spacing: 0.2px; }
+.hero-desc { font-size: 17px; line-height: 1.85; color: var(--text-2); margin-bottom: 36px; max-width: 460px; }
+.hero-btns { display: flex; gap: 14px; flex-wrap: wrap; margin-bottom: 36px; }
+.btn-primary {
+  background: var(--crimson); color: #fff;
+  padding: 14px 30px; border-radius: var(--radius-sm);
+  font-size: 15px; font-weight: 600; letter-spacing: 0.2px;
+  box-shadow: 0 3px 12px rgba(123,17,19,0.3);
+  transition: background .2s, transform .15s, box-shadow .2s;
+  display: inline-block;
+}
+.btn-primary:hover { background: var(--crimson-dark); transform: translateY(-2px); box-shadow: 0 6px 20px rgba(123,17,19,0.35); }
+.btn-outline {
+  border: 2px solid var(--crimson); color: var(--crimson);
+  padding: 14px 30px; border-radius: var(--radius-sm);
+  font-size: 15px; font-weight: 600;
+  transition: background .2s, color .2s, transform .15s;
+  display: inline-block;
+}
+.btn-outline:hover { background: var(--crimson-light); transform: translateY(-2px); }
+.hero-quote {
+  padding: 16px 20px;
+  border-left: 4px solid var(--gold);
+  background: rgba(200,151,42,0.06);
+  border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+  max-width: 420px;
+}
+.hero-quote p { font-family: 'Cormorant Garamond', serif; font-size: 17px; font-style: italic; color: var(--crimson-dark); line-height: 1.65; }
+
+/* HERO SIDE */
+.hero-side {
+  background: linear-gradient(180deg, #F9EEEE 0%, var(--cream) 100%);
+  padding: 48px 28px; display: flex; flex-direction: column; gap: 20px; align-items: center;
+  border-left: 3px solid var(--crimson);
+}
+.avatar {
+  width: 150px; height: 150px; border-radius: 50%;
+  border: 4px solid #fff; outline: 3px solid var(--crimson);
+  overflow: hidden; flex-shrink: 0;
+  display: flex; align-items: center; justify-content: center;
+  background: var(--crimson-light);
+  box-shadow: 0 4px 20px rgba(123,17,19,0.15);
+}
+.avatar img { width: 100%; height: 100%; object-fit: cover; object-position: top; }
+.av-init { font-family: 'Cormorant Garamond', serif; font-size: 52px; font-weight: 700; color: var(--crimson); }
+.name-card {
+  text-align: center; padding: 14px 18px;
+  background: #fff; border-radius: var(--radius-sm);
+  border: 1px solid var(--border); width: 100%;
+  box-shadow: var(--shadow-sm);
+}
+.name-card-name { font-family: 'Cormorant Garamond', serif; font-size: 17px; font-weight: 700; color: var(--crimson-deep); margin-bottom: 3px; }
+.name-card-title { font-size: 11px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.7px; }
+.info-block { width: 100%; }
+.info-row { display: flex; gap: 12px; align-items: flex-start; padding: 11px 0; border-bottom: 1px solid var(--border); }
+.info-row:last-child { border-bottom: none; }
+.info-ico {
+  width: 32px; height: 32px; background: var(--crimson); border-radius: 6px;
+  display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 1px;
+  box-shadow: 0 2px 6px rgba(123,17,19,0.2);
+}
+.info-ico svg { width: 14px; height: 14px; fill: var(--gold); }
+.info-lbl { font-size: 10px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.8px; margin-bottom: 2px; }
+.info-val { font-size: 13px; color: var(--text); font-weight: 600; line-height: 1.4; }
+
+/* ── SYMBOLS ── */
+.symbols {
+  background: var(--crimson-deep);
+  padding: 32px 48px;
+  display: flex; align-items: center; justify-content: center; gap: 56px; flex-wrap: wrap;
+}
+.sym-item { display: flex; flex-direction: column; align-items: center; gap: 10px; }
+.sym-item svg { opacity: 0.85; transition: opacity .2s, transform .2s; }
+.sym-item:hover svg { opacity: 1; transform: scale(1.08); }
+.sym-label { font-size: 11px; color: #F5C6C6; text-align: center; letter-spacing: 0.5px; max-width: 90px; line-height: 1.4; }
+
+/* ── METRICS ── */
+.metrics { display: grid; grid-template-columns: repeat(4,1fr); border-bottom: 1px solid var(--border); }
+.metric { padding: 36px 20px; text-align: center; border-right: 1px solid var(--border); transition: background .2s; }
+.metric:last-child { border-right: none; }
+.metric:hover { background: var(--crimson-light); }
+.m-num { font-family: 'Cormorant Garamond', serif; font-size: 52px; font-weight: 700; color: var(--crimson); line-height: 1; }
+.m-gold { color: var(--gold); }
+.m-lbl { font-size: 13px; color: var(--muted); margin-top: 6px; font-weight: 400; }
+
+/* ── SECTIONS ── */
+.sec { padding: 72px 48px; border-bottom: 1px solid var(--border); }
+.sec-tag { font-size: 11px; color: var(--crimson); letter-spacing: 2.5px; text-transform: uppercase; font-weight: 700; margin-bottom: 8px; }
+.sec-h { font-family: 'Cormorant Garamond', serif; font-size: 38px; font-weight: 700; color: var(--crimson-deep); margin-bottom: 40px; }
+
+/* ── SERVICES ── */
+.srv-grid { display: grid; grid-template-columns: repeat(2,1fr); gap: 20px; }
+.srv {
+  padding: 28px; border: 1px solid var(--border); border-radius: var(--radius);
+  background: #fff; transition: border-color .25s, box-shadow .25s, transform .25s;
+  position: relative; overflow: hidden;
+}
+.srv::before {
+  content: ''; position: absolute; left: 0; top: 0; bottom: 0;
+  width: 4px; background: var(--crimson); border-radius: 4px 0 0 4px;
+  transform: scaleY(0); transform-origin: bottom; transition: transform .3s;
+}
+.srv:hover { border-color: var(--crimson); box-shadow: var(--shadow-md); transform: translateY(-3px); }
+.srv:hover::before { transform: scaleY(1); }
+.srv-head { display: flex; align-items: center; gap: 14px; margin-bottom: 14px; }
+.srv-ico {
+  width: 46px; height: 46px; background: var(--crimson-light); border-radius: 10px;
+  display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+  transition: background .25s;
+}
+.srv:hover .srv-ico { background: var(--crimson); }
+.srv-ico svg { width: 22px; height: 22px; fill: var(--crimson); transition: fill .25s; }
+.srv:hover .srv-ico svg { fill: #fff; }
+.srv-name { font-size: 16px; font-weight: 700; color: var(--crimson-deep); }
+.srv-desc { font-size: 14px; color: var(--text-2); line-height: 1.75; }
+.srv-chips { display: flex; flex-wrap: wrap; gap: 7px; margin-top: 16px; }
+.chip { font-size: 11px; background: var(--crimson-light); color: var(--crimson); padding: 4px 12px; border-radius: 20px; font-weight: 600; transition: background .2s, color .2s; }
+.srv:hover .chip { background: var(--crimson); color: #fff; }
+
+/* ── PROCESS ── */
+.steps-sec { padding: 0; border-bottom: 1px solid var(--border); }
+.steps-header { padding: 72px 48px 0; }
+.steps { display: grid; grid-template-columns: repeat(4,1fr); border-top: 1px solid var(--border); margin-top: 36px; }
+.step { padding: 36px 28px; border-right: 1px solid var(--border); transition: background .2s; }
+.step:last-child { border-right: none; }
+.step:hover { background: var(--crimson-light); }
+.step-n { font-family: 'Cormorant Garamond', serif; font-size: 64px; font-weight: 700; color: rgba(123,17,19,0.1); line-height: 1; margin-bottom: 14px; }
+.step-t { font-size: 15px; font-weight: 700; color: var(--crimson-deep); margin-bottom: 8px; }
+.step-d { font-size: 13px; color: var(--muted); line-height: 1.7; }
+
+/* ── CASES ── */
+.cases-list { display: flex; flex-direction: column; gap: 16px; }
+.case {
+  display: flex; gap: 24px; padding: 26px; border: 1px solid var(--border);
+  border-radius: var(--radius); background: #fff; align-items: flex-start;
+  transition: border-color .25s, box-shadow .25s, transform .25s;
+}
+.case:hover { border-color: var(--crimson); box-shadow: var(--shadow-md); transform: translateX(4px); }
+.case-badge {
+  width: 54px; height: 54px; border-radius: 10px; background: var(--crimson);
+  display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+  box-shadow: 0 3px 10px rgba(123,17,19,0.25);
+}
+.case-badge span { font-size: 13px; font-weight: 800; color: var(--gold); letter-spacing: 0.5px; }
+.pill { display: inline-block; font-size: 11px; padding: 4px 12px; border-radius: 20px; margin-bottom: 8px; font-weight: 700; letter-spacing: 0.3px; }
+.pill-win { background: #ECFDF5; color: #065F46; }
+.pill-prog { background: #FEF3C7; color: #92400E; }
+.case-t { font-size: 15px; font-weight: 700; color: var(--crimson-deep); margin-bottom: 6px; }
+.case-d { font-size: 13px; color: var(--muted); line-height: 1.75; }
+
+/* ── TESTIMONIALS ── */
+.testi-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 20px; }
+.testi {
+  padding: 28px; background: #fff; border-radius: var(--radius);
+  border: 1px solid var(--border); position: relative;
+  transition: box-shadow .25s, transform .25s;
+  box-shadow: var(--shadow-sm);
+}
+.testi:hover { box-shadow: var(--shadow-lg); transform: translateY(-4px); }
+.testi::before {
+  content: '"'; font-family: 'Cormorant Garamond', serif;
+  font-size: 80px; color: var(--crimson-light); line-height: 1;
+  position: absolute; top: 12px; left: 20px;
+}
+.testi-text { font-size: 14px; color: var(--text-2); line-height: 1.8; margin-bottom: 20px; padding-top: 32px; font-style: italic; }
+.testi-author { display: flex; align-items: center; gap: 12px; border-top: 1px solid var(--border); padding-top: 16px; }
+.testi-avatar { width: 40px; height: 40px; border-radius: 50%; background: var(--crimson); display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+.testi-avatar span { font-size: 14px; font-weight: 700; color: var(--gold); }
+.testi-name { font-size: 14px; font-weight: 700; color: var(--crimson-deep); }
+.testi-role { font-size: 12px; color: var(--muted); }
+.testi-stars { color: var(--gold); font-size: 13px; margin-top: 2px; }
+
+/* ── ABOUT ── */
+.about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 56px; align-items: start; }
+.about-p { font-size: 15px; line-height: 1.9; color: var(--text-2); }
+.about-p p { margin-bottom: 18px; }
+.about-p p:last-child { margin-bottom: 0; }
+.hl { color: var(--crimson-deep); font-weight: 700; }
+.creds { display: flex; flex-direction: column; gap: 12px; }
+.cred {
+  padding: 15px 18px; background: var(--cream); border-radius: var(--radius-sm);
+  border-left: 4px solid var(--crimson); transition: background .2s, transform .2s;
+}
+.cred:hover { background: var(--crimson-light); transform: translateX(4px); }
+.cred-txt { font-size: 14px; color: var(--text); line-height: 1.55; }
+
+/* ── CTA + FORM ── */
+.cta-sec { background: var(--crimson-deep); padding: 80px 48px; }
+.cta-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: start; }
+.cta-left { }
+.cta-h { font-family: 'Cormorant Garamond', serif; font-size: 42px; font-weight: 700; color: #fff; margin-bottom: 14px; line-height: 1.2; }
+.cta-p { font-size: 15px; color: #F5C6C6; line-height: 1.8; margin-bottom: 32px; }
+.cta-contacts { display: flex; flex-direction: column; gap: 16px; }
+.ci { display: flex; gap: 14px; align-items: center; }
+.ci-box { width: 44px; height: 44px; background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.15); border-radius: 8px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+.ci-box svg { width: 17px; height: 17px; fill: var(--gold); }
+.ci-lbl { font-size: 10px; color: rgba(245,198,198,0.7); text-transform: uppercase; letter-spacing: 0.8px; margin-bottom: 3px; }
+.ci-val { font-size: 16px; color: #fff; font-weight: 600; }
+
+/* FORM */
+.contact-form { background: #fff; border-radius: var(--radius); padding: 36px 32px; box-shadow: var(--shadow-lg); }
+.form-title { font-family: 'Cormorant Garamond', serif; font-size: 24px; font-weight: 700; color: var(--crimson-deep); margin-bottom: 6px; }
+.form-sub { font-size: 13px; color: var(--muted); margin-bottom: 24px; }
+.form-group { margin-bottom: 18px; }
+.form-group label { display: block; font-size: 13px; font-weight: 600; color: var(--text); margin-bottom: 6px; }
+.form-group input, .form-group textarea, .form-group select {
+  width: 100%; padding: 12px 16px;
+  border: 1.5px solid var(--border); border-radius: var(--radius-sm);
+  font-size: 14px; font-family: 'Inter', sans-serif; color: var(--text);
+  background: #fff; transition: border-color .2s, box-shadow .2s;
+  outline: none;
+}
+.form-group input:focus, .form-group textarea:focus, .form-group select:focus {
+  border-color: var(--crimson); box-shadow: 0 0 0 3px rgba(123,17,19,0.08);
+}
+.form-group textarea { resize: vertical; min-height: 110px; }
+.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+.btn-submit {
+  width: 100%; padding: 14px; background: var(--crimson); color: #fff;
+  border: none; border-radius: var(--radius-sm); font-size: 15px;
+  font-weight: 700; font-family: 'Inter', sans-serif; cursor: pointer;
+  transition: background .2s, transform .15s, box-shadow .2s;
+  box-shadow: 0 3px 12px rgba(123,17,19,0.3);
+  letter-spacing: 0.3px;
+}
+.btn-submit:hover { background: var(--crimson-dark); transform: translateY(-2px); box-shadow: 0 6px 20px rgba(123,17,19,0.4); }
+
+/* ── FOOTER ── */
+footer {
+  background: var(--text); color: #9CA3AF;
+  padding: 56px 48px 28px;
+}
+.footer-grid { display: grid; grid-template-columns: 1.5fr 1fr 1fr; gap: 48px; margin-bottom: 48px; }
+.footer-brand { }
+.footer-logo { display: flex; align-items: center; gap: 10px; margin-bottom: 14px; }
+.footer-logo-text { font-family: 'Cormorant Garamond', serif; font-size: 20px; font-weight: 700; color: #fff; }
+.footer-logo-text em { color: var(--gold); font-style: normal; }
+.footer-desc { font-size: 13px; line-height: 1.8; color: #9CA3AF; margin-bottom: 20px; }
+.footer-social { display: flex; gap: 10px; }
+.social-btn {
+  width: 38px; height: 38px; border-radius: 8px;
+  background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.12);
+  display: flex; align-items: center; justify-content: center;
+  transition: background .2s, transform .2s;
+}
+.social-btn:hover { background: var(--crimson); transform: translateY(-2px); }
+.social-btn svg { width: 16px; height: 16px; fill: #fff; }
+.footer-col h4 { font-size: 13px; font-weight: 700; color: #fff; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 16px; }
+.footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+.footer-col ul li a { font-size: 13px; color: #9CA3AF; transition: color .2s; }
+.footer-col ul li a:hover { color: var(--gold); }
+.footer-bottom { border-top: 1px solid rgba(255,255,255,0.08); padding-top: 24px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; }
+.footer-copy { font-size: 12px; color: #6B7280; }
+.footer-domain { font-size: 13px; color: var(--gold); font-weight: 600; }
+
+/* ── RESPONSIVE ── */
+@media (max-width: 1024px) {
+  .hero { grid-template-columns: 1fr; }
+  .hero-side { border-left: none; border-top: 3px solid var(--crimson); flex-direction: row; flex-wrap: wrap; justify-content: center; }
+  .testi-grid { grid-template-columns: 1fr 1fr; }
+  .footer-grid { grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 768px) {
+  .topbar { padding: 8px 20px; }
+  .topbar-left { display: none; }
+  nav { padding: 14px 20px; }
+  .nav-links { display: none; }
+  .nav-links.open { display: flex; flex-direction: column; position: absolute; top: 60px; left: 0; right: 0; background: #fff; padding: 20px; box-shadow: var(--shadow-lg); gap: 16px; }
+  .nav-toggle { display: flex; }
+  .hero-main { padding: 40px 20px; }
+  .hero h1 { font-size: 46px; }
+  .symbols { padding: 24px 20px; gap: 28px; }
+  .metrics { grid-template-columns: repeat(2,1fr); }
+  .metric:nth-child(2) { border-right: none; }
+  .sec { padding: 48px 20px; }
+  .srv-grid { grid-template-columns: 1fr; }
+  .steps-header { padding: 48px 20px 0; }
+  .steps { grid-template-columns: 1fr 1fr; }
+  .about-grid { grid-template-columns: 1fr; gap: 32px; }
+  .cta-sec { padding: 48px 20px; }
+  .cta-inner { grid-template-columns: 1fr; gap: 36px; }
+  .testi-grid { grid-template-columns: 1fr; }
+  .footer-grid { grid-template-columns: 1fr; gap: 32px; }
+  footer { padding: 40px 20px 20px; }
+  .footer-bottom { flex-direction: column; text-align: center; }
+  .form-row { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+<div class="page-wrap">
+
+<!-- TOPBAR -->
+<div class="topbar">
+  <span class="topbar-left">Tư vấn miễn phí lần đầu · Gặp trực tiếp hoặc qua Zalo</span>
+  <span class="topbar-right">☎ 0817 017 649</span>
+</div>
+
+<!-- NAV -->
+<nav>
+  <div class="logo">
+    <svg width="34" height="34" viewBox="0 0 64 64" fill="none">
+      <rect width="64" height="64" rx="8" fill="#7B1113"/>
+      <line x1="32" y1="12" x2="32" y2="52" stroke="#C8972A" stroke-width="2.5" stroke-linecap="round"/>
+      <line x1="16" y1="20" x2="48" y2="20" stroke="#C8972A" stroke-width="2.5" stroke-linecap="round"/>
+      <line x1="16" y1="20" x2="10" y2="32" stroke="#C8972A" stroke-width="2" stroke-linecap="round"/>
+      <line x1="16" y1="20" x2="22" y2="32" stroke="#C8972A" stroke-width="2" stroke-linecap="round"/>
+      <path d="M10 32 Q16 36 22 32" stroke="#C8972A" stroke-width="2" fill="none" stroke-linecap="round"/>
+      <line x1="48" y1="20" x2="42" y2="32" stroke="#C8972A" stroke-width="2" stroke-linecap="round"/>
+      <line x1="48" y1="20" x2="54" y2="32" stroke="#C8972A" stroke-width="2" stroke-linecap="round"/>
+      <path d="M42 32 Q48 36 54 32" stroke="#C8972A" stroke-width="2" fill="none" stroke-linecap="round"/>
+      <rect x="26" y="50" width="12" height="3" rx="1.5" fill="#C8972A"/>
+    </svg>
+    <div class="logo-text">LS. Nguyễn <em>Quảng An</em></div>
+  </div>
+  <div class="nav-links" id="navLinks">
+    <a href="#dich-vu">Dịch vụ</a>
+    <a href="#kinh-nghiem">Kinh nghiệm</a>
+    <a href="#danh-gia">Đánh giá</a>
+    <a href="#gioi-thieu">Giới thiệu</a>
+    <a href="#lien-he" class="nav-btn">Liên hệ ngay</a>
+  </div>
+  <div class="nav-toggle" id="navToggle" onclick="document.getElementById('navLinks').classList.toggle('open')">
+    <span></span><span></span><span></span>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-main">
+    <div class="badge"><div class="badge-dot"></div><span class="badge-text">Luật sư · TP. Hồ Chí Minh</span></div>
+    <h1>Nguyễn<br><span>Quảng An</span></h1>
+    <div class="hero-subtitle">Luật sư hành nghề · Công ty Luật TNHH Bảo Vệ Công Lý</div>
+    <div class="hero-desc">Tư vấn và đại diện pháp lý trong tranh chấp dân sự, ngân hàng, đất đai, hôn nhân và hình sự. Trực tiếp nghiên cứu hồ sơ — nói thẳng về cơ hội thực tế của vụ việc.</div>
+    <div class="hero-btns">
+      <a href="#lien-he" class="btn-primary">Tư vấn miễn phí lần đầu</a>
+      <a href="#dich-vu" class="btn-outline">Xem dịch vụ</a>
+    </div>
+    <div class="hero-quote">
+      <p>Công lý không tự đến — cần người dám đứng ra bảo vệ nó.</p>
+    </div>
+  </div>
+  <div class="hero-side">
+    <div class="avatar">
+      <!-- Thay bằng <img src="anh-luat-su.jpg" alt="LS. Nguyễn Quảng An"> khi có ảnh thật -->
+      <div class="av-init">QA</div>
+    </div>
+    <div class="name-card">
+      <div class="name-card-name">Nguyễn Quảng An</div>
+      <div class="name-card-title">Luật sư hành nghề · BVCL</div>
+    </div>
+    <div class="info-block">
+      <div class="info-row">
+        <div class="info-ico"><svg viewBox="0 0 24 24"><path d="M6.6 10.8c1.4 2.8 3.8 5.1 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1-9.4 0-17-7.6-17-17 0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.3 0 .7-.2 1L6.6 10.8z"/></svg></div>
+        <div><div class="info-lbl">Zalo / Điện thoại</div><div class="info-val">0817 017 649</div></div>
+      </div>
+      <div class="info-row">
+        <div class="info-ico"><svg viewBox="0 0 24 24"><path d="M6.6 10.8c1.4 2.8 3.8 5.1 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1-9.4 0-17-7.6-17-17 0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.3 0 .7-.2 1L6.6 10.8z"/></svg></div>
+        <div><div class="info-lbl">Điện thoại phụ</div><div class="info-val">0777 801 708</div></div>
+      </div>
+      <div class="info-row">
+        <div class="info-ico"><svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg></div>
+        <div><div class="info-lbl">Văn phòng</div><div class="info-val">234 Thành Công, P. Phú Thọ Hoà, Q. Tân Phú, TP.HCM</div></div>
+      </div>
+      <div class="info-row">
+        <div class="info-ico"><svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg></div>
+        <div><div class="info-lbl">Website</div><div class="info-val">luatsunguyenquangan.site</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SYMBOLS -->
+<div class="symbols">
+  <div class="sym-item">
+    <svg width="56" height="56" viewBox="0 0 64 64" fill="none">
+      <line x1="32" y1="6" x2="32" y2="58" stroke="#C8972A" stroke-width="3" stroke-linecap="round"/>
+      <line x1="12" y1="18" x2="52" y2="18" stroke="#C8972A" stroke-width="3" stroke-linecap="round"/>
+      <line x1="12" y1="18" x2="4" y2="36" stroke="#C8972A" stroke-width="2.5" stroke-linecap="round"/>
+      <line x1="12" y1="18" x2="20" y2="36" stroke="#C8972A" stroke-width="2.5" stroke-linecap="round"/>
+      <path d="M4 36 Q12 42 20 36" stroke="#C8972A" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+      <line x1="52" y1="18" x2="44" y2="36" stroke="#C8972A" stroke-width="2.5" stroke-linecap="round"/>
+      <line x1="52" y1="18" x2="60" y2="36" stroke="#C8972A" stroke-width="2.5" stroke-linecap="round"/>
+      <path d="M44 36 Q52 42 60 36" stroke="#C8972A" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+      <rect x="24" y="55" width="16" height="4" rx="2" fill="#C8972A"/>
+      <circle cx="32" cy="18" r="3" fill="#C8972A"/>
+    </svg>
+    <span class="sym-label">Cán cân công lý</span>
+  </div>
+  <div class="sym-item">
+    <svg width="56" height="56" viewBox="0 0 64 64" fill="none">
+      <polygon points="32,6 38,24 58,24 42,36 48,54 32,42 16,54 22,36 6,24 26,24" stroke="#C8972A" stroke-width="2.5" fill="none" stroke-linejoin="round"/>
+      <circle cx="32" cy="32" r="7" stroke="#C8972A" stroke-width="2" fill="none"/>
+    </svg>
+    <span class="sym-label">Liên đoàn Luật sư Việt Nam</span>
+  </div>
+  <div class="sym-item">
+    <svg width="56" height="56" viewBox="0 0 64 64" fill="none">
+      <rect x="10" y="8" width="36" height="48" rx="3" stroke="#C8972A" stroke-width="2.5" fill="none"/>
+      <line x1="10" y1="8" x2="10" y2="56" stroke="#C8972A" stroke-width="5" stroke-linecap="round"/>
+      <line x1="20" y1="22" x2="38" y2="22" stroke="#C8972A" stroke-width="2" stroke-linecap="round"/>
+      <line x1="20" y1="30" x2="38" y2="30" stroke="#C8972A" stroke-width="2" stroke-linecap="round"/>
+      <line x1="20" y1="38" x2="30" y2="38" stroke="#C8972A" stroke-width="2" stroke-linecap="round"/>
+    </svg>
+    <span class="sym-label">Bộ luật Việt Nam</span>
+  </div>
+  <div class="sym-item">
+    <svg width="56" height="56" viewBox="0 0 64 64" fill="none">
+      <rect x="8" y="28" width="48" height="28" rx="2" stroke="#C8972A" stroke-width="2.5" fill="none"/>
+      <polygon points="32,6 6,28 58,28" stroke="#C8972A" stroke-width="2.5" fill="none" stroke-linejoin="round"/>
+      <rect x="18" y="38" width="8" height="18" rx="1" stroke="#C8972A" stroke-width="2" fill="none"/>
+      <rect x="38" y="38" width="8" height="18" rx="1" stroke="#C8972A" stroke-width="2" fill="none"/>
+      <rect x="28" y="38" width="8" height="12" rx="1" stroke="#C8972A" stroke-width="2" fill="none"/>
+      <line x1="8" y1="56" x2="56" y2="56" stroke="#C8972A" stroke-width="3" stroke-linecap="round"/>
+    </svg>
+    <span class="sym-label">Tòa án nhân dân</span>
+  </div>
+  <div class="sym-item">
+    <svg width="56" height="56" viewBox="0 0 64 64" fill="none">
+      <path d="M12 44 L12 32 C12 24 18 18 26 18 L32 18 L38 18 C46 18 52 24 52 32 L52 44" stroke="#C8972A" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+      <path d="M22 18 C22 14 26 10 32 10 C38 10 42 14 42 18" stroke="#C8972A" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+      <line x1="8" y1="44" x2="56" y2="44" stroke="#C8972A" stroke-width="3" stroke-linecap="round"/>
+      <line x1="32" y1="18" x2="32" y2="38" stroke="#C8972A" stroke-width="2" stroke-linecap="round" stroke-dasharray="3 3"/>
+    </svg>
+    <span class="sym-label">Bảo vệ quyền lợi</span>
+  </div>
+</div>
+
+<!-- METRICS -->
+<div class="metrics">
+  <div class="metric"><div class="m-num">5<span class="m-gold">+</span></div><div class="m-lbl">Năm kinh nghiệm</div></div>
+  <div class="metric"><div class="m-num">100<span class="m-gold">+</span></div><div class="m-lbl">Vụ án đã xử lý</div></div>
+  <div class="metric"><div class="m-num">5</div><div class="m-lbl">Lĩnh vực hành nghề</div></div>
+  <div class="metric"><div class="m-num m-gold">0đ</div><div class="m-lbl">Tư vấn lần đầu</div></div>
+</div>
+
+<!-- SERVICES -->
+<section id="dich-vu" class="sec">
+  <div class="sec-tag">01 — Dịch vụ</div>
+  <div class="sec-h">Lĩnh vực hành nghề</div>
+  <div class="srv-grid">
+    <div class="srv">
+      <div class="srv-head">
+        <div class="srv-ico"><svg viewBox="0 0 24 24"><path d="M11.5 2C6.81 2 3 5.81 3 10.5S6.81 19 11.5 19h.5v3c4.86-2.34 8-7 8-11.5C20 5.81 16.19 2 11.5 2zm1 14.5h-2v-2h2v2zm0-4h-2c0-3.25 3-3 3-5 0-1.1-.9-2-2-2s-2 .9-2 2h-2c0-2.21 1.79-4 4-4s4 1.79 4 4c0 2.5-3 2.75-3 5z"/></svg></div>
+        <div class="srv-name">Tranh chấp ngân hàng & tín dụng</div>
+      </div>
+      <div class="srv-desc">Bảo vệ quyền lợi người vay trong tranh chấp với ngân hàng, tổ chức tín dụng. Phân tích thời hiệu kiện, lãi suất, hợp đồng thế chấp và các điều khoản bất lợi.</div>
+      <div class="srv-chips"><span class="chip">Thời hiệu kiện</span><span class="chip">Lãi suất</span><span class="chip">Thế chấp</span><span class="chip">Phản tố</span></div>
+    </div>
+    <div class="srv">
+      <div class="srv-head">
+        <div class="srv-ico"><svg viewBox="0 0 24 24"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg></div>
+        <div class="srv-name">Đất đai & bất động sản</div>
+      </div>
+      <div class="srv-desc">Tranh chấp ranh giới, mua bán giấy tay, thu hồi đất, cấp và thu hồi giấy chứng nhận quyền sử dụng đất, thi hành án dân sự liên quan đất đai.</div>
+      <div class="srv-chips"><span class="chip">Sổ đỏ</span><span class="chip">Giấy tay</span><span class="chip">Ranh giới</span><span class="chip">Thu hồi đất</span></div>
+    </div>
+    <div class="srv">
+      <div class="srv-head">
+        <div class="srv-ico"><svg viewBox="0 0 24 24"><path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z"/></svg></div>
+        <div class="srv-name">Hôn nhân & gia đình</div>
+      </div>
+      <div class="srv-desc">Ly hôn đơn phương và thuận tình, phân chia tài sản chung, tranh chấp tài sản trước hôn nhân, quyền nuôi con và nghĩa vụ cấp dưỡng.</div>
+      <div class="srv-chips"><span class="chip">Ly hôn</span><span class="chip">Tài sản chung</span><span class="chip">Quyền nuôi con</span><span class="chip">Cấp dưỡng</span></div>
+    </div>
+    <div class="srv">
+      <div class="srv-head">
+        <div class="srv-ico"><svg viewBox="0 0 24 24"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm0 4l5 2.18V11c0 3.5-2.33 6.79-5 7.93-2.67-1.14-5-4.43-5-7.93V7.18L12 5z"/></svg></div>
+        <div class="srv-name">Hình sự & lao động</div>
+      </div>
+      <div class="srv-desc">Bào chữa trong vụ án hình sự, tư vấn và đại diện trong tranh chấp lao động, sa thải trái pháp luật, đòi lương và bảo hiểm xã hội.</div>
+      <div class="srv-chips"><span class="chip">Bào chữa</span><span class="chip">Sa thải</span><span class="chip">Lương & BHXH</span><span class="chip">Hợp đồng lao động</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- PROCESS -->
+<section class="steps-sec">
+  <div class="steps-header">
+    <div class="sec-tag">02 — Quy trình</div>
+    <div class="sec-h" style="margin-bottom:0">Làm việc như thế nào</div>
+  </div>
+  <div class="steps">
+    <div class="step"><div class="step-n">01</div><div class="step-t">Tiếp nhận & tư vấn</div><div class="step-d">Gặp trực tiếp tại văn phòng hoặc Zalo. Miễn phí lần đầu. Đánh giá sơ bộ và nói thẳng về triển vọng vụ việc.</div></div>
+    <div class="step"><div class="step-n">02</div><div class="step-t">Nghiên cứu hồ sơ</div><div class="step-d">Đọc kỹ toàn bộ tài liệu, tra cứu căn cứ pháp lý, xác định chiến lược bảo vệ quyền lợi tối ưu cho thân chủ.</div></div>
+    <div class="step"><div class="step-n">03</div><div class="step-t">Ký hợp đồng & triển khai</div><div class="step-d">Hợp đồng dịch vụ pháp lý minh bạch. Soạn hồ sơ, đại diện nộp và theo dõi tiến độ vụ án.</div></div>
+    <div class="step"><div class="step-n">04</div><div class="step-t">Bảo vệ tại tòa</div><div class="step-d">Trực tiếp tham gia phiên xét xử, trình bày luận cứ và bảo vệ quyền lợi tối đa cho thân chủ.</div></div>
+  </div>
+</section>
+
+<!-- CASES -->
+<section id="kinh-nghiem" class="sec">
+  <div class="sec-tag">03 — Kinh nghiệm</div>
+  <div class="sec-h">Vụ án tiêu biểu</div>
+  <div class="cases-list">
+    <div class="case">
+      <div class="case-badge"><span>DS</span></div>
+      <div>
+        <span class="pill pill-win">Bảo vệ thành công</span>
+        <div class="case-t">Tranh chấp hợp đồng tín dụng ngân hàng — giảm nghĩa vụ trả nợ</div>
+        <div class="case-d">Đại diện bị đơn trong vụ ngân hàng kiện đòi nợ gốc và lãi. Phân tích thành công vấn đề thời hiệu khởi kiện và lãi suất vượt trần, đề xuất phương án trả nợ có lợi được tòa chấp nhận.</div>
+      </div>
+    </div>
+    <div class="case">
+      <div class="case-badge"><span>ĐĐ</span></div>
+      <div>
+        <span class="pill pill-win">Bảo vệ thành công</span>
+        <div class="case-t">Thu hồi giấy chứng nhận quyền sử dụng đất sau bản án phúc thẩm</div>
+        <div class="case-d">Đại diện thân chủ sau bản án phúc thẩm, thực hiện đầy đủ thủ tục thi hành án dân sự và phục hồi giấy chứng nhận qua Sở TN&MT TP.HCM.</div>
+      </div>
+    </div>
+    <div class="case">
+      <div class="case-badge"><span>HN</span></div>
+      <div>
+        <span class="pill pill-prog">Đang xử lý</span>
+        <div class="case-t">Tranh chấp tài sản trong vụ ly hôn — bảo vệ tài sản riêng trước hôn nhân</div>
+        <div class="case-d">Đại diện nguyên đơn yêu cầu xác định và bảo vệ phần tài sản riêng đóng góp trước hôn nhân theo Điều 59 Luật Hôn nhân và Gia đình 2014.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section id="danh-gia" class="sec" style="background:var(--cream)">
+  <div class="sec-tag">04 — Đánh giá</div>
+  <div class="sec-h">Khách hàng nói gì</div>
+  <div class="testi-grid">
+    <div class="testi">
+      <div class="testi-text">Luật sư An đã giúp tôi giảm được khoản lãi suất rất lớn trong vụ kiện với ngân hàng. Anh đọc kỹ từng trang hợp đồng và tìm ra điểm mấu chốt mà tôi không hề biết. Rất chuyên nghiệp và tận tâm.</div>
+      <div class="testi-author">
+        <div class="testi-avatar"><span>TH</span></div>
+        <div>
+          <div class="testi-name">Anh T.H.</div>
+          <div class="testi-role">Khách hàng tranh chấp ngân hàng · Q. Bình Tân</div>
+          <div class="testi-stars">★★★★★</div>
+        </div>
+      </div>
+    </div>
+    <div class="testi">
+      <div class="testi-text">Vụ tranh chấp đất đai của gia đình tôi kéo dài nhiều năm. Sau khi nhờ luật sư An, mọi thứ được giải quyết rõ ràng. Anh luôn cập nhật tiến độ và giải thích cặn kẽ từng bước tố tụng.</div>
+      <div class="testi-author">
+        <div class="testi-avatar"><span>ML</span></div>
+        <div>
+          <div class="testi-name">Chị M.L.</div>
+          <div class="testi-role">Khách hàng tranh chấp đất đai · Củ Chi</div>
+          <div class="testi-stars">★★★★★</div>
+        </div>
+      </div>
+    </div>
+    <div class="testi">
+      <div class="testi-text">Tôi cần ly hôn nhưng chồng không chịu hợp tác. Luật sư An tư vấn thủ tục đơn phương rõ ràng, hỗ trợ tôi từ đầu đến cuối. Nhờ anh tôi giữ được quyền nuôi con và phần tài sản xứng đáng.</div>
+      <div class="testi-author">
+        <div class="testi-avatar"><span>PN</span></div>
+        <div>
+          <div class="testi-name">Chị P.N.</div>
+          <div class="testi-role">Khách hàng ly hôn · Q. Tân Phú</div>
+          <div class="testi-stars">★★★★★</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="gioi-thieu" class="sec">
+  <div class="sec-tag">05 — Giới thiệu</div>
+  <div class="sec-h">Luật sư Nguyễn Quảng An</div>
+  <div class="about-grid">
+    <div class="about-p">
+      <p>Tôi là <span class="hl">Nguyễn Quảng An</span>, luật sư hành nghề tại TP. Hồ Chí Minh, công tác tại Công ty Luật TNHH Bảo Vệ Công Lý, 234 đường Thành Công, Quận Tân Phú.</p>
+      <p>Tôi trực tiếp tham gia tố tụng và đại diện khách hàng trong nhiều vụ án dân sự, tín dụng ngân hàng, đất đai, hôn nhân gia đình và hình sự tại TAND các cấp tại TP. Hồ Chí Minh.</p>
+      <p>Điều tôi làm khác biệt: <span class="hl">đọc kỹ hồ sơ, tìm căn cứ pháp lý cụ thể</span> và nói thẳng với khách hàng về cơ hội thực tế — không vẽ viễn cảnh đẹp để lấy hợp đồng.</p>
+    </div>
+    <div class="creds">
+      <div class="cred"><div class="cred-txt">Luật sư hành nghề tại Đoàn Luật sư TP. Hồ Chí Minh</div></div>
+      <div class="cred"><div class="cred-txt">Công tác tại Công ty Luật TNHH Bảo Vệ Công Lý, Quận Tân Phú, TP.HCM</div></div>
+      <div class="cred"><div class="cred-txt">Kinh nghiệm tố tụng tại TAND Quận/Huyện và TAND TP. Hồ Chí Minh</div></div>
+      <div class="cred"><div class="cred-txt">Chuyên sâu tranh chấp dân sự, ngân hàng, đất đai và hôn nhân gia đình</div></div>
+      <div class="cred"><div class="cred-txt">Tư vấn miễn phí lần đầu — gặp trực tiếp tại văn phòng hoặc qua Zalo</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA + FORM -->
+<section id="lien-he" class="cta-sec">
+  <div class="cta-inner">
+    <div class="cta-left">
+      <div class="cta-h">Liên hệ tư vấn</div>
+      <div class="cta-p">Tư vấn miễn phí lần đầu. Gặp trực tiếp tại văn phòng hoặc trao đổi qua Zalo — anh/chị chủ động chọn hình thức phù hợp nhất.</div>
+      <div class="cta-contacts">
+        <div class="ci">
+          <div class="ci-box"><svg viewBox="0 0 24 24"><path d="M6.6 10.8c1.4 2.8 3.8 5.1 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1-9.4 0-17-7.6-17-17 0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.3 0 .7-.2 1L6.6 10.8z"/></svg></div>
+          <div><div class="ci-lbl">Zalo / Điện thoại</div><div class="ci-val">0817 017 649</div></div>
+        </div>
+        <div class="ci">
+          <div class="ci-box"><svg viewBox="0 0 24 24"><path d="M6.6 10.8c1.4 2.8 3.8 5.1 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1-9.4 0-17-7.6-17-17 0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.3 0 .7-.2 1L6.6 10.8z"/></svg></div>
+          <div><div class="ci-lbl">Điện thoại phụ</div><div class="ci-val">0777 801 708</div></div>
+        </div>
+        <div class="ci">
+          <div class="ci-box"><svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg></div>
+          <div><div class="ci-lbl">Văn phòng</div><div class="ci-val">234 Thành Công, P. Phú Thọ Hoà, Q. Tân Phú, TP.HCM</div></div>
+        </div>
+      </div>
+    </div>
+    <div class="contact-form">
+      <div class="form-title">Gửi yêu cầu tư vấn</div>
+      <div class="form-sub">Chúng tôi sẽ liên hệ lại trong vòng 2 giờ làm việc</div>
+      <form action="mailto:tranthanhsggp@gmail.com" method="post" enctype="text/plain">
+        <div class="form-row">
+          <div class="form-group">
+            <label for="fname">Họ và tên *</label>
+            <input type="text" id="fname" name="ho_ten" placeholder="Nguyễn Văn A" required>
+          </div>
+          <div class="form-group">
+            <label for="fphone">Số điện thoại *</label>
+            <input type="tel" id="fphone" name="dien_thoai" placeholder="09xx xxx xxx" required>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="ftype">Lĩnh vực cần tư vấn</label>
+          <select id="ftype" name="linh_vuc">
+            <option value="">-- Chọn lĩnh vực --</option>
+            <option>Tranh chấp ngân hàng & tín dụng</option>
+            <option>Đất đai & bất động sản</option>
+            <option>Hôn nhân & gia đình</option>
+            <option>Hình sự</option>
+            <option>Lao động</option>
+            <option>Khác</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="fmsg">Mô tả vụ việc</label>
+          <textarea id="fmsg" name="noi_dung" placeholder="Mô tả ngắn gọn tình huống pháp lý của anh/chị..."></textarea>
+        </div>
+        <button type="submit" class="btn-submit">Gửi yêu cầu tư vấn</button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <div class="footer-logo">
+        <svg width="30" height="30" viewBox="0 0 64 64" fill="none"><rect width="64" height="64" rx="8" fill="#7B1113"/><line x1="32" y1="12" x2="32" y2="52" stroke="#C8972A" stroke-width="2.5" stroke-linecap="round"/><line x1="16" y1="20" x2="48" y2="20" stroke="#C8972A" stroke-width="2.5" stroke-linecap="round"/><line x1="16" y1="20" x2="10" y2="32" stroke="#C8972A" stroke-width="2" stroke-linecap="round"/><line x1="16" y1="20" x2="22" y2="32" stroke="#C8972A" stroke-width="2" stroke-linecap="round"/><path d="M10 32 Q16 36 22 32" stroke="#C8972A" stroke-width="2" fill="none" stroke-linecap="round"/><line x1="48" y1="20" x2="42" y2="32" stroke="#C8972A" stroke-width="2" stroke-linecap="round"/><line x1="48" y1="20" x2="54" y2="32" stroke="#C8972A" stroke-width="2" stroke-linecap="round"/><path d="M42 32 Q48 36 54 32" stroke="#C8972A" stroke-width="2" fill="none" stroke-linecap="round"/><rect x="26" y="50" width="12" height="3" rx="1.5" fill="#C8972A"/></svg>
+        <div class="footer-logo-text">LS. Nguyễn <em>Quảng An</em></div>
+      </div>
+      <div class="footer-desc">Luật sư hành nghề tại TP. Hồ Chí Minh. Tư vấn và đại diện pháp lý trong tranh chấp dân sự, ngân hàng, đất đai, hôn nhân và hình sự.</div>
+      <div class="footer-social">
+        <a href="#" class="social-btn" title="Facebook">
+          <svg viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg>
+        </a>
+        <a href="https://zalo.me/0817017649" class="social-btn" title="Zalo">
+          <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 14H9V9h2v7zm4 0h-2V9h2v7z"/></svg>
+        </a>
+      </div>
+    </div>
+    <div class="footer-col">
+      <h4>Dịch vụ</h4>
+      <ul>
+        <li><a href="#dich-vu">Tranh chấp ngân hàng</a></li>
+        <li><a href="#dich-vu">Đất đai & bất động sản</a></li>
+        <li><a href="#dich-vu">Hôn nhân & gia đình</a></li>
+        <li><a href="#dich-vu">Hình sự & lao động</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Liên hệ</h4>
+      <ul>
+        <li><a href="tel:0817017649">☎ 0817 017 649</a></li>
+        <li><a href="tel:0777801708">☎ 0777 801 708</a></li>
+        <li><a href="#">234 Thành Công, Q. Tân Phú</a></li>
+        <li><a href="/cdn-cgi/l/email-protection#720600131c061a131c1a0115150232151f131b1e5c111d1f"><span class="__cf_email__" data-cfemail="186c6a79766c707976706b7f7f68587f75797174367b7775">[email&#160;protected]</span></a></li>
+        <li><a href="#">Thứ 2–6: 8:00–17:30</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <div class="footer-copy">© 2026 Luật sư Nguyễn Quảng An · Công ty Luật TNHH Bảo V�
