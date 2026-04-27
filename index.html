@@ -781,8 +781,8 @@ footer {
     </div>
     <div class="contact-form">
       <div class="form-title">Gửi yêu cầu tư vấn</div>
-      <div class="form-sub">Luật sư Quảng An trực tiếp đọc hồ sơ và phản hồi trong 30 phút qua Zalo</div>
-      <form id="contactForm" onsubmit="sendToZalo(event)">
+      <div class="form-sub">Luật sư Quảng An trực tiếp đọc hồ sơ và phản hồi trong 30 phút</div>
+      <form id="contactForm" onsubmit="submitToN8n(event)">
         <div class="form-row">
           <div class="form-group">
             <label for="fname">Họ và tên *</label>
@@ -790,7 +790,26 @@ footer {
           </div>
           <div class="form-group">
             <label for="fphone">Số điện thoại *</label>
-            <input type="tel" id="fphone" name="dien_thoai" placeholder="09xx xxx xxx" required>
+            <input type="tel" id="fphone" name="so_dien_thoai" placeholder="09xx xxx xxx" required>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="femail">Email</label>
+            <input type="email" id="femail" name="email" placeholder="email@example.com">
+          </div>
+          <div class="form-group">
+            <label for="fkhuvuc">Khu vực</label>
+            <select id="fkhuvuc" name="khu_vuc">
+              <option value="">-- Chọn khu vực --</option>
+              <option>TP.HCM</option>
+              <option>Hà Nội</option>
+              <option>Đà Nẵng</option>
+              <option>Bình Dương</option>
+              <option>Đồng Nai</option>
+              <option>Long An</option>
+              <option>Tỉnh khác</option>
+            </select>
           </div>
         </div>
         <div class="form-group">
@@ -809,11 +828,13 @@ footer {
           <label for="fmsg">Mô tả vụ việc</label>
           <textarea id="fmsg" name="noi_dung" placeholder="Mô tả ngắn gọn tình huống pháp lý của anh/chị..."></textarea>
         </div>
+        <input type="hidden" name="nguon" value="website">
         <div style="font-family:Inter,sans-serif;font-size:11px;color:#6B7280;margin-bottom:10px;display:flex;align-items:center;gap:6px;">
   <svg width="13" height="13" viewBox="0 0 24 24" fill="#6B7280"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4z"/></svg>
   Thông tin được bảo mật tuyệt đối — chỉ luật sư Quảng An đọc
 </div>
 <button type="submit" class="btn-submit">Gửi yêu cầu — Luật sư phản hồi trong 30 phút</button>
+<div id="formStatus" style="margin-top:14px;font-family:Inter,sans-serif;font-size:13px;text-align:center;font-weight:600;"></div>
       </form>
     </div>
   </div>
@@ -1028,7 +1049,7 @@ footer {
     </div>
   </div>
   <div class="footer-bottom">
-    <div class="footer-copy">© 2026 Luật sư Nguyễn Quảng An · Công ty Luật TNHH Bảo V�
+    <div class="footer-copy">© 2026 Luật sư Nguyễn Quảng An · Công ty Luật TNHH Bảo V 
 
 
 <!-- FLOATING CHAT BUTTONS -->
@@ -1055,3 +1076,64 @@ footer {
     <svg width="38" height="38" viewBox="0 0 48 48"><defs><linearGradient id="mg" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" style="stop-color:#0084FF"/><stop offset="100%" style="stop-color:#A033FF"/></linearGradient></defs><path fill="url(#mg)" d="M24 4C12.95 4 4 13.4 4 24.8c0 6.1 2.5 11.55 6.56 15.4.34.3.54.73.55 1.18l.11 3.7a1.5 1.5 0 002.1 1.32l4.12-1.82c.35-.15.74-.18 1.11-.08A21.8 21.8 0 0024 45.6c11.05 0 20-9.4 20-20.8C44 13.4 35.05 4 24 4z"/><path fill="white" d="M36.34 20.38l-5.84 9.26a3 3 0 01-4.33.8l-4.65-3.48a1.2 1.2 0 00-1.44 0l-6.28 4.76c-.84.63-1.93-.36-1.38-1.26l5.84-9.26a3 3 0 014.33-.8l4.65 3.48a1.2 1.2 0 001.44 0l6.28-4.76c.84-.63 1.93.36 1.38 1.26z"/></svg>
   </a>
 </div>
+
+<!-- ===== n8n Form Submission Script ===== -->
+<script>
+async function submitToN8n(event) {
+  event.preventDefault();
+  
+  const form = document.getElementById('contactForm');
+  const statusDiv = document.getElementById('formStatus');
+  const submitBtn = form.querySelector('button[type="submit"]');
+  const originalBtnText = submitBtn.textContent;
+  
+  // Disable button & show loading
+  submitBtn.disabled = true;
+  submitBtn.textContent = 'Đang gửi...';
+  statusDiv.textContent = '';
+  statusDiv.style.color = '';
+  
+  // Collect form data into JSON
+  const formData = new FormData(form);
+  const data = {};
+  formData.forEach((value, key) => {
+    data[key] = value;
+  });
+  
+  // n8n Production Webhook URL
+  const WEBHOOK_URL = 'https://truongquangnhat.app.n8n.cloud/webhook/legal-intake';
+  
+  try {
+    const response = await fetch(WEBHOOK_URL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(data)
+    });
+    
+    if (response.ok) {
+      statusDiv.style.color = '#15803D';
+      statusDiv.innerHTML = '✓ Đã gửi thành công! Luật sư Quảng An sẽ liên hệ trong 30 phút.';
+      form.reset();
+      // Track conversion (optional - for Google Analytics)
+      if (typeof gtag !== 'undefined') {
+        gtag('event', 'lead_submit', {
+          'event_category': 'engagement',
+          'event_label': data.linh_vuc || 'unknown'
+        });
+      }
+    } else {
+      throw new Error('HTTP ' + response.status);
+    }
+  } catch (err) {
+    console.error('Form submission error:', err);
+    statusDiv.style.color = '#B91C1C';
+    statusDiv.innerHTML = '✗ Có lỗi xảy ra. Vui lòng gọi <a href="tel:0777801708" style="color:#7B1113;text-decoration:underline;">0777 801 708</a> hoặc <a href="https://zalo.me/0777801708" target="_blank" style="color:#7B1113;text-decoration:underline;">nhắn Zalo</a>.';
+  } finally {
+    submitBtn.disabled = false;
+    submitBtn.textContent = originalBtnText;
+  }
+}
+</script>
+
+</body>
+</html>
