@@ -1101,7 +1101,7 @@ async function submitToN8n(event) {
   });
   
   // n8n Production Webhook URL
-  const WEBHOOK_URL = 'https://truongquangnhat.app.n8n.cloud/webhook/legal-intake';
+  data.access_key = 'a00fd643-ce8c-476c-90c1-c24dd6f21617'; data.to = 'n.quangan1708@gmail.com'; const WEBHOOK_URL = 'https://api.web3forms.com/submit';
   
   try {
     const response = await fetch(WEBHOOK_URL, {
@@ -1110,7 +1110,7 @@ async function submitToN8n(event) {
       body: JSON.stringify(data)
     });
     
-    if (response.ok) {
+    const result = await response.json(); if (result.success) {
       statusDiv.style.color = '#15803D';
       statusDiv.innerHTML = '✓ Đã gửi thành công! Luật sư Quảng An sẽ liên hệ trong 30 phút.';
       form.reset();
