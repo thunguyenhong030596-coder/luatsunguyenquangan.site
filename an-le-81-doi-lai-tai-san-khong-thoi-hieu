@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Án lệ 81/2025/AL — Khi hợp đồng đã chấm dứt và bên nợ đã thừa nhận nợ, tranh chấp được xác định là đòi lại tài sản — không áp dụng thời hiệu khởi kiện.">
+<title>Án lệ 81/2025 — Nợ tiền dịch vụ đã thừa nhận: kiện lúc nào cũng được, không bị hết thời hiệu | LS Nguyễn Quảng An</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--crimson:#7B1113;--crimson-dark:#5A0C0E;--crimson-deep:#3D0708;--crimson-light:#FDECEA;--gold:#C8972A;--gold-light:#F5EDD8;--cream:#FAFAF7;--white:#fff;--text:#1C1C2E;--muted:#6B7280;--border:#E5E7EB}
+*{margin:0;padding:0;box-sizing:border-box}html{scroll-behavior:smooth}
+body{font-family:'Inter',sans-serif;background:var(--white);color:var(--text);font-size:16px;line-height:1.7}
+a{text-decoration:none;color:inherit}
+nav{padding:18px 48px;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid var(--border);position:sticky;top:0;background:rgba(255,255,255,0.97);backdrop-filter:blur(8px);box-shadow:0 1px 12px rgba(0,0,0,0.06);z-index:100}
+.logo{display:flex;align-items:center;gap:10px}
+.logo-text{font-family:'Cormorant Garamond',serif;font-size:20px;font-weight:700;color:var(--crimson)}
+.logo-text em{color:var(--gold);font-style:normal}
+.nav-links{display:flex;gap:28px;align-items:center}
+.nav-links a{font-size:14px;color:var(--muted);font-weight:500}
+.nav-links a:hover{color:var(--crimson)}
+.nav-btn{background:var(--crimson);color:#fff!important;padding:10px 22px;border-radius:7px;font-size:14px;font-weight:600;box-shadow:0 2px 8px rgba(123,17,19,0.25)}
+.article-hero{background:linear-gradient(135deg,var(--crimson-deep) 0%,var(--crimson) 100%);padding:56px 48px 48px}
+.article-hero-inner{max-width:780px;margin:0 auto}
+.back-link{display:inline-flex;align-items:center;gap:6px;font-size:13px;color:rgba(255,255,255,0.65);margin-bottom:24px}
+.article-cat-tag{display:inline-block;background:var(--gold);color:var(--crimson-deep);font-size:10px;font-weight:700;padding:4px 14px;border-radius:20px;letter-spacing:1px;text-transform:uppercase;margin-bottom:16px}
+.article-hero h1{font-family:'Cormorant Garamond',serif;font-size:38px;font-weight:700;color:#fff;line-height:1.2;margin-bottom:16px}
+.article-hero-meta{display:flex;align-items:center;gap:20px;font-size:13px;color:rgba(255,255,255,0.6)}
+.article-wrap{max-width:780px;margin:0 auto;padding:48px 48px 64px}
+.article-body{font-size:16px;line-height:1.9;color:#374151}
+.article-body h2{font-family:'Cormorant Garamond',serif;font-size:26px;font-weight:700;color:var(--crimson-deep);margin:40px 0 14px;padding-bottom:10px;border-bottom:2px solid var(--crimson-light)}
+.article-body h3{font-family:'Cormorant Garamond',serif;font-size:20px;font-weight:700;color:var(--crimson-deep);margin:28px 0 10px}
+.article-body p{margin-bottom:18px}
+.article-body strong{color:var(--crimson-deep)}
+.highlight-box{background:var(--crimson-light);border-left:4px solid var(--crimson);padding:18px 22px;border-radius:0 10px 10px 0;margin:28px 0}
+.highlight-box p{margin-bottom:0;color:var(--crimson-dark);font-weight:500;font-size:15px}
+.gold-box{background:var(--gold-light);border-left:4px solid var(--gold);padding:18px 22px;border-radius:0 10px 10px 0;margin:28px 0}
+.gold-box p{margin-bottom:0;color:#5a3d00;font-size:15px}
+.verdict-box{background:var(--crimson-deep);border-radius:12px;padding:28px 32px;margin:32px 0;color:#fff}
+.verdict-box h3{font-family:'Cormorant Garamond',serif;font-size:22px;color:var(--gold);margin-bottom:14px}
+.verdict-box p{color:rgba(255,255,255,0.85);font-size:15px;margin-bottom:10px}
+.verdict-box p:last-child{margin-bottom:0}
+.info-table{width:100%;border-collapse:collapse;margin:24px 0;font-size:14px}
+.info-table th{background:var(--crimson-deep);color:#fff;padding:12px 16px;text-align:left;font-weight:600}
+.info-table td{padding:11px 16px;border-bottom:1px solid var(--border);vertical-align:top}
+.info-table tr:nth-child(even) td{background:var(--cream)}
+.tags-wrap{display:flex;gap:8px;flex-wrap:wrap;margin:32px 0}
+.tag{font-size:11px;background:var(--crimson-light);color:var(--crimson);padding:5px 14px;border-radius:20px;font-weight:600}
+.author-box{display:flex;gap:20px;align-items:center;padding:24px;border:1px solid var(--border);border-radius:12px;margin:36px 0;background:var(--cream)}
+.author-avatar{width:56px;height:56px;border-radius:50%;background:var(--crimson);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.author-avatar span{font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:700;color:var(--gold)}
+.author-name{font-size:15px;font-weight:700;color:var(--crimson-deep)}
+.author-title{font-size:12px;color:var(--muted);margin-top:2px}
+.article-cta{background:var(--crimson-deep);padding:36px;border-radius:14px;margin-top:52px;text-align:center}
+.article-cta h3{font-family:'Cormorant Garamond',serif;font-size:26px;color:#fff;margin-bottom:8px}
+.article-cta p{font-size:14px;color:rgba(255,255,255,0.7);margin-bottom:22px}
+.cta-btns{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+.btn-gold{background:var(--gold);color:var(--crimson-deep);padding:13px 28px;border-radius:7px;font-size:14px;font-weight:700}
+.btn-outline-white{border:2px solid rgba(255,255,255,0.4);color:#fff;padding:12px 26px;border-radius:7px;font-size:14px;font-weight:600}
+footer{background:#1C1C2E;color:#9CA3AF;padding:32px 48px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px}
+.footer-copy{font-size:12px}.footer-back{font-size:13px;color:var(--gold)}
+.float-wrap{position:fixed;bottom:28px;right:24px;z-index:99999}
+.float-btn{width:52px;height:52px;border-radius:50%;display:flex;align-items:center;justify-content:center;background:#0068FF;box-shadow:0 4px 16px rgba(0,0,0,0.22)}
+@media(max-width:768px){nav{padding:14px 20px}.article-hero{padding:36px 20px 32px}.article-hero h1{font-size:26px}.article-wrap{padding:32px 20px 48px}footer{padding:24px 20px;flex-direction:column;text-align:center}}
+</style>
+</head>
+<body>
+<nav>
+  <div class="logo">
+    <svg width="32" height="32" viewBox="0 0 64 64" fill="none"><rect width="64" height="64" rx="8" fill="#7B1113"/><line x1="32" y1="12" x2="32" y2="52" stroke="#C8972A" stroke-width="2.5" stroke-linecap="round"/><line x1="16" y1="20" x2="48" y2="20" stroke="#C8972A" stroke-width="2.5" stroke-linecap="round"/><line x1="16" y1="20" x2="10" y2="32" stroke="#C8972A" stroke-width="2" stroke-linecap="round"/><line x1="16" y1="20" x2="22" y2="32" stroke="#C8972A" stroke-width="2" stroke-linecap="round"/><path d="M10 32 Q16 36 22 32" stroke="#C8972A" stroke-width="2" fill="none" stroke-linecap="round"/><line x1="48" y1="20" x2="42" y2="32" stroke="#C8972A" stroke-width="2" stroke-linecap="round"/><line x1="48" y1="20" x2="54" y2="32" stroke="#C8972A" stroke-width="2" stroke-linecap="round"/><path d="M42 32 Q48 36 54 32" stroke="#C8972A" stroke-width="2" fill="none" stroke-linecap="round"/><rect x="26" y="50" width="12" height="3" rx="1.5" fill="#C8972A"/></svg>
+    <div class="logo-text">LS. Nguyễn <em>Quảng An</em></div>
+  </div>
+  <div class="nav-links">
+    <a href="index.html">Trang chủ</a>
+    <a href="index.html#dich-vu">Dịch vụ</a>
+    <a href="blog.html">Blog pháp lý</a>
+    <a href="index.html#lien-he" class="nav-btn">Tư vấn ngay</a>
+  </div>
+</nav>
+
+<div class="article-hero">
+  <div class="article-hero-inner">
+    <a href="blog.html" class="back-link">← Quay lại Blog pháp lý</a>
+    <div class="article-cat-tag">Án lệ · Thời hiệu &amp; Đòi nợ</div>
+    <h1>Án lệ 81/2025 — Bên kia đã thừa nhận nợ: kiện đòi tiền lúc nào cũng được, không bị hết thời hiệu</h1>
+    <div class="article-hero-meta">
+      <span>31/05/2026</span>
+      <span>7 phút đọc</span>
+      <span>LS. Nguyễn Quảng An</span>
+    </div>
+  </div>
+</div>
+
+<div class="article-wrap">
+  <div class="article-body">
+
+    <div class="highlight-box">
+      <p>⚖️ <strong>Án lệ số 81/2025/AL</strong> — Hội đồng Thẩm phán TAND Tối cao thông qua ngày 24/12/2025. Giải quyết câu hỏi: Khi hợp đồng đã chấm dứt, bên nợ đã bằng văn bản thừa nhận sẽ trả tiền nhưng vẫn không trả — bên đòi nợ có bị hết thời hiệu khởi kiện không?</p>
+    </div>
+
+    <h2>Tóm tắt vụ việc</h2>
+    <p>Công ty M (Nhật Bản) ký hợp đồng dịch vụ với Công ty A (Việt Nam) năm 2012 để cung cấp chuyên gia kỹ thuật. Hợp đồng được chấm dứt theo thỏa thuận tháng 11/2012. Công ty M xuất hóa đơn tổng cộng <strong>26.343.433 Yên Nhật</strong>, thời hạn thanh toán cuối cùng là ngày 31/3/2013.</p>
+    <p>Điều quan trọng: ngày 01/6/2013, Công ty A gửi văn bản chính thức xác nhận <em>"Công ty A sẽ thanh toán chi phí dịch vụ cho Công ty M"</em> — nhưng mãi không trả.</p>
+    <p>Năm 2018 — tức 5 năm sau thời hạn thanh toán — Công ty M mới khởi kiện. Công ty A lập tức yêu cầu áp dụng thời hiệu khởi kiện (2 năm theo Luật Thương mại) để đình chỉ vụ án.</p>
+    <p>Tòa sơ thẩm và phúc thẩm đồng ý với Công ty A: đình chỉ vụ án vì hết thời hiệu. Nhưng Hội đồng Thẩm phán TAND Tối cao <strong>hủy toàn bộ 2 quyết định đó</strong>.</p>
+
+    <h2>Lý luận của Tòa Tối cao</h2>
+
+    <h3>Bước 1: Xác định đúng bản chất tranh chấp</h3>
+    <p>Tòa dưới mắc sai lầm cơ bản: xác định đây là "tranh chấp hợp đồng dịch vụ" — nên áp dụng thời hiệu 2 năm theo Luật Thương mại.</p>
+    <p>Tuy nhiên, thực chất vụ việc khác: hai bên đã <strong>chấm dứt hợp đồng bằng thỏa thuận</strong> và Công ty A đã <strong>thừa nhận bằng văn bản</strong> nghĩa vụ thanh toán. Lúc này, không còn tranh chấp gì về hợp đồng nữa — chỉ còn một bên chưa trả tiền cho bên kia.</p>
+    <p>Đây chính là <strong>tranh chấp dân sự về đòi lại tài sản</strong> (khoản 2 Điều 155 BLDS 2015) — khác hoàn toàn với tranh chấp hợp đồng.</p>
+
+    <h3>Bước 2: Tranh chấp đòi lại tài sản — không áp dụng thời hiệu khởi kiện</h3>
+    <p>Khoản 2 Điều 155 BLDS 2015 quy định rõ: <strong>không áp dụng thời hiệu khởi kiện</strong> đối với "yêu cầu đòi lại tài sản do người khác quản lý, chiếm hữu." Vì vậy, dù Công ty M khởi kiện sau 5 năm, vụ án vẫn phải được Tòa án thụ lý và giải quyết.</p>
+
+    <div class="verdict-box">
+      <h3>📋 Giải pháp pháp lý của án lệ</h3>
+      <p>Khi hợp đồng đã chấm dứt và bên nợ đã xác nhận nghĩa vụ thanh toán (bằng văn bản), tranh chấp phải được xác định là <strong>tranh chấp dân sự về đòi lại tài sản</strong> — <strong>không áp dụng thời hiệu khởi kiện</strong> theo khoản 2 Điều 155 BLDS 2015.</p>
+    </div>
+
+    <h2>Ý nghĩa thực tiễn — khi nào áp dụng được</h2>
+
+    <table class="info-table">
+      <tr><th>Điều kiện</th><th>Kết quả</th></tr>
+      <tr><td>Hợp đồng đã chấm dứt (bằng thỏa thuận hoặc thanh lý)</td><td>Không còn tranh chấp hợp đồng</td></tr>
+      <tr><td>Bên nợ đã thừa nhận nợ bằng văn bản (công văn, biên bản họp, email...)</td><td>Xác lập rõ nghĩa vụ phải trả</td></tr>
+      <tr><td>Bên nợ chưa thực hiện nghĩa vụ thanh toán</td><td>Tranh chấp đòi lại tài sản</td></tr>
+      <tr><td>Kết quả</td><td>Không áp dụng thời hiệu khởi kiện — kiện lúc nào cũng được</td></tr>
+    </table>
+
+    <div class="gold-box">
+      <p>⚠️ <strong>Lưu ý:</strong> Án lệ này chỉ áp dụng khi hội tụ đủ 2 yếu tố: (1) hợp đồng đã chấm dứt, VÀ (2) bên nợ đã thừa nhận nghĩa vụ thanh toán. Nếu hợp đồng còn hiệu lực hoặc chưa có sự thừa nhận nợ, thời hiệu khởi kiện vẫn áp dụng bình thường.</p>
+    </div>
+
+    <h2>Bài học cho doanh nghiệp</h2>
+    <p><strong>Nếu bạn là bên đòi nợ:</strong> Hãy lấy được văn bản thừa nhận nợ từ đối tác trước khi hợp đồng chấm dứt — đây là "chìa khóa" loại bỏ thời hiệu khởi kiện. Email, biên bản họp, công văn xác nhận đều có giá trị pháp lý nếu đủ rõ ràng.</p>
+    <p><strong>Nếu bạn là bên bị kiện:</strong> Không bao giờ ký văn bản thừa nhận nợ bằng văn bản nếu bạn có ý định tranh chấp sau này về việc có thực sự nợ hay không. Một chữ ký trên công văn xác nhận có thể loại bỏ hoàn toàn lá chắn thời hiệu của bạn.</p>
+
+    <div class="tags-wrap">
+      <span class="tag">Án lệ 81/2025</span>
+      <span class="tag">Thời hiệu khởi kiện</span>
+      <span class="tag">Đòi lại tài sản</span>
+      <span class="tag">Thừa nhận nợ</span>
+      <span class="tag">Hợp đồng dịch vụ</span>
+    </div>
+
+    <div class="author-box">
+      <div class="author-avatar"><span>QA</span></div>
+      <div>
+        <div class="author-name">Luật sư Nguyễn Quảng An</div>
+        <div class="author-title">Luật sư hành nghề · Công ty Luật TNHH Bảo Vệ Công Lý · Đoàn Luật sư TP.HCM</div>
+      </div>
+    </div>
+
+    <div class="article-cta">
+      <h3>Đang bị khất nợ hoặc bị kiện đòi nợ?</h3>
+      <p>Luật sư Quảng An tư vấn chiến lược xử lý phù hợp — miễn phí lần đầu, phản hồi 30 phút.</p>
+      <div class="cta-btns">
+        <a href="https://zalo.me/0777801708" target="_blank" class="btn-gold">Zalo tư vấn — 0777 801 708</a>
+        <a href="index.html#lien-he" class="btn-outline-white">Gửi yêu cầu tư vấn</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <div class="footer-copy">© 2026 Luật sư Nguyễn Quảng An · Công ty Luật TNHH Bảo Vệ Công Lý</div>
+  <a href="blog.html" class="footer-back">← Về Blog pháp lý</a>
+</footer>
+<div class="float-wrap">
+  <a href="https://zalo.me/0777801708" target="_blank" class="float-btn">
+    <svg viewBox="0 0 48 48"><path d="M24 4C12.95 4 4 12.95 4 24s8.95 20 20 20 20-8.95 20-20S35.05 4 24 4zm9.5 28.5h-2.1l-5.4-7v7h-2V17h2.1l5.4 7v-7h2v15.5z" fill="#fff"/></svg>
+  </a>
+</div>
+</body>
+</html>
