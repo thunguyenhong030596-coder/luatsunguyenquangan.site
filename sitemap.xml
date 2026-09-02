@@ -2,19 +2,67 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://luatsunguyenquangan.site/</loc>
-    <lastmod>2026-04-13</lastmod>
+    <lastmod>2026-09-02</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
     <loc>https://luatsunguyenquangan.site/blog.html</loc>
-    <lastmod>2026-04-13</lastmod>
+    <lastmod>2026-09-02</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://luatsunguyenquangan.site/hoa-giai-bat-buoc-truoc-khi-khoi-kien.html</loc>
     <lastmod>2026-04-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://luatsunguyenquangan.site/bi-ngan-hang-goi-len-lam-viec-5-dieu-phai-biet.html</loc>
+    <lastmod>2026-09-02</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://luatsunguyenquangan.site/thoi-hieu-khoi-kien-no-ngan-hang.html</loc>
+    <lastmod>2026-09-02</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://luatsunguyenquangan.site/mua-dat-giay-tay-khong-sang-ten-co-kien-duoc-khong.html</loc>
+    <lastmod>2026-09-02</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://luatsunguyenquangan.site/ly-hon-don-phuong-khi-vo-chong-khong-dong-y.html</loc>
+    <lastmod>2026-09-02</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://luatsunguyenquangan.site/an-le-79-hop-dong-dat-coc.html</loc>
+    <lastmod>2026-09-02</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://luatsunguyenquangan.site/an-le-80-tang-cho-ve-so.html</loc>
+    <lastmod>2026-09-02</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://luatsunguyenquangan.site/an-le-81-doi-lai-tai-san-khong-thoi-hieu.html</loc>
+    <lastmod>2026-09-02</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://luatsunguyenquangan.site/an-le-82-tai-san-chung-vo-chong.html</loc>
+    <lastmod>2026-05-31</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>

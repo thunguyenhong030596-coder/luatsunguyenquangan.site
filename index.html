@@ -430,6 +430,21 @@ footer {
   .float-chat { bottom: 16px; right: 14px; }
 }
 
+
+/* ---- Contact via chat (Zalo / Messenger) ---- */
+.contact-chat .form-sub{margin-bottom:22px;line-height:1.7}
+.chat-btns{display:flex;flex-direction:column;gap:12px;margin-bottom:22px}
+.chat-btn{display:flex;align-items:center;gap:14px;padding:14px 18px;border-radius:12px;text-decoration:none;color:#fff;transition:transform .2s,box-shadow .2s}
+.chat-btn:hover{transform:translateY(-2px);box-shadow:0 8px 22px rgba(0,0,0,.18)}
+.chat-zalo{background:#0068FF}
+.chat-mess{background:linear-gradient(135deg,#0084FF,#A033FF)}
+.chat-ico{width:46px;height:46px;border-radius:50%;background:rgba(255,255,255,.18);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.chat-lbl{display:block;font-family:Inter,sans-serif;font-size:15px;font-weight:600}
+.chat-val{display:block;font-family:Inter,sans-serif;font-size:12.5px;opacity:.9;margin-top:2px}
+.chat-tips{background:#FAFAF7;border:1px solid #E5E7EB;border-radius:10px;padding:14px 16px;margin-bottom:14px}
+.chat-tip-title{font-family:Inter,sans-serif;font-size:12.5px;font-weight:600;color:#3D0708;margin-bottom:8px}
+.chat-tips ul{margin:0;padding-left:18px;font-family:Inter,sans-serif;font-size:13px;color:#4B5563;line-height:1.75}
+.chat-note{font-family:Inter,sans-serif;font-size:11px;color:#6B7280;display:flex;align-items:center;gap:6px}
 </style>
 </head>
 <body>
@@ -727,7 +742,7 @@ footer {
       <div class="cred"><div class="cred-txt">Công tác tại Công ty Luật TNHH Bảo Vệ Công Lý, Quận Tân Phú, TP.HCM</div></div>
       <div class="cred"><div class="cred-txt">Kinh nghiệm tố tụng tại TAND Quận/Huyện và TAND TP. Hồ Chí Minh</div></div>
       <div class="cred"><div class="cred-txt">Chuyên sâu tranh chấp dân sự, ngân hàng, đất đai và hôn nhân gia đình</div></div>
-      <div class="cred"><div class="cred-txt">Tư vấn miễn phí lần đầu — gặp trực tiếp tại văn phòng hoặc qua Zalo</div></div>
+      <div class="cred"><div class="cred-txt">Tư vấn miễn phí lần đầu — trao đổi qua Zalo, Messenger hoặc gặp trực tiếp tại văn phòng</div></div>
     </div>
   </div>
 </section>
@@ -763,7 +778,7 @@ footer {
   <div class="cta-inner">
     <div class="cta-left">
       <div class="cta-h">Liên hệ tư vấn</div>
-      <div class="cta-p">Tư vấn miễn phí lần đầu. Gặp trực tiếp tại văn phòng hoặc trao đổi qua Zalo — anh/chị chủ động chọn hình thức phù hợp nhất.</div>
+      <div class="cta-p">Trao đổi qua Zalo hoặc Messenger — luật sư đọc trực tiếp, không qua trung gian. Có thể hẹn gặp tại văn phòng sau khi đã trao đổi sơ bộ.</div>
       <div class="cta-contacts">
         <div class="ci">
           <div class="ci-box"><svg viewBox="0 0 24 24"><path d="M6.6 10.8c1.4 2.8 3.8 5.1 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1-9.4 0-17-7.6-17-17 0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.3 0 .7-.2 1L6.6 10.8z"/></svg></div>
@@ -779,63 +794,28 @@ footer {
         </div>
       </div>
     </div>
-    <div class="contact-form">
-      <div class="form-title">Gửi yêu cầu tư vấn</div>
-      <div class="form-sub">Luật sư Quảng An trực tiếp đọc hồ sơ và phản hồi trong 30 phút</div>
-      <form id="contactForm" onsubmit="submitToN8n(event)">
-        <div class="form-row">
-          <div class="form-group">
-            <label for="fname">Họ và tên *</label>
-            <input type="text" id="fname" name="ho_ten" placeholder="Nguyễn Văn A" required>
-          </div>
-          <div class="form-group">
-            <label for="fphone">Số điện thoại *</label>
-            <input type="tel" id="fphone" name="so_dien_thoai" placeholder="09xx xxx xxx" required>
-          </div>
-        </div>
-        <div class="form-row">
-          <div class="form-group">
-            <label for="femail">Email</label>
-            <input type="email" id="femail" name="email" placeholder="email@example.com">
-          </div>
-          <div class="form-group">
-            <label for="fkhuvuc">Khu vực</label>
-            <select id="fkhuvuc" name="khu_vuc">
-              <option value="">-- Chọn khu vực --</option>
-              <option>TP.HCM</option>
-              <option>Hà Nội</option>
-              <option>Đà Nẵng</option>
-              <option>Bình Dương</option>
-              <option>Đồng Nai</option>
-              <option>Long An</option>
-              <option>Tỉnh khác</option>
-            </select>
-          </div>
-        </div>
-        <div class="form-group">
-          <label for="ftype">Lĩnh vực cần tư vấn</label>
-          <select id="ftype" name="linh_vuc">
-            <option value="">-- Chọn lĩnh vực --</option>
-            <option>Tranh chấp ngân hàng & tín dụng</option>
-            <option>Đất đai & bất động sản</option>
-            <option>Hôn nhân & gia đình</option>
-            <option>Hình sự</option>
-            <option>Lao động</option>
-            <option>Khác</option>
-          </select>
-        </div>
-        <div class="form-group">
-          <label for="fmsg">Mô tả vụ việc</label>
-          <textarea id="fmsg" name="noi_dung" placeholder="Mô tả ngắn gọn tình huống pháp lý của anh/chị..."></textarea>
-        </div>
-        <input type="hidden" name="nguon" value="website">
-        <div style="font-family:Inter,sans-serif;font-size:11px;color:#6B7280;margin-bottom:10px;display:flex;align-items:center;gap:6px;">
-  <svg width="13" height="13" viewBox="0 0 24 24" fill="#6B7280"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4z"/></svg>
-  Thông tin được bảo mật tuyệt đối — chỉ luật sư Quảng An đọc
-</div>
-<button type="submit" class="btn-submit">Gửi yêu cầu — Luật sư phản hồi trong 30 phút</button>
-<div id="formStatus" style="margin-top:14px;font-family:Inter,sans-serif;font-size:13px;text-align:center;font-weight:600;"></div>
-      </form>
+    <div class="contact-form contact-chat">
+      <div class="form-title">Nhắn tin cho luật sư</div>
+      <div class="form-sub">Mọi trao đổi đều qua Zalo hoặc Messenger — không cần điền form, không cần email. Gửi mô tả ngắn vụ việc kèm ảnh giấy tờ (nếu có), luật sư Quảng An phản hồi trong giờ làm việc.</div>
+      <div class="chat-btns">
+        <a href="https://zalo.me/0777801708" target="_blank" rel="noopener" class="chat-btn chat-zalo">
+          <span class="chat-ico"><svg width="26" height="26" viewBox="0 0 48 48" fill="white"><path d="M24 4C12.95 4 4 12.95 4 24c0 3.9 1.08 7.54 2.95 10.66L4 44l9.6-2.87A19.88 19.88 0 0024 44c11.05 0 20-8.95 20-20S35.05 4 24 4zm8.44 27.2c-.46-.23-2.73-1.35-3.16-1.5-.42-.16-.73-.23-1.04.23-.3.46-1.18 1.5-1.45 1.8-.27.31-.54.35-1 .12-.46-.23-1.95-.72-3.72-2.3-1.37-1.22-2.3-2.74-2.57-3.2-.27-.46-.03-.7.2-.93.21-.2.46-.54.7-.81.23-.27.3-.46.46-.77.16-.3.08-.58-.04-.81-.12-.23-1.04-2.5-1.42-3.43-.38-.92-.76-.8-1.04-.81h-.89c-.31 0-.81.12-1.24.58-.42.46-1.62 1.58-1.62 3.86 0 2.27 1.66 4.47 1.89 4.78.23.3 3.26 4.98 7.9 6.99 1.1.48 1.96.76 2.63.97 1.1.35 2.1.3 2.89.18.88-.13 2.73-1.12 3.12-2.2.38-1.08.38-2 .27-2.2-.12-.2-.42-.31-.88-.54z"/></svg></span>
+          <span><span class="chat-lbl">Chat Zalo</span><span class="chat-val">0777 801 708</span></span>
+        </a>
+        <a href="https://m.me/61588220735976" target="_blank" rel="noopener" class="chat-btn chat-mess">
+          <span class="chat-ico"><svg width="26" height="26" viewBox="0 0 48 48" fill="white"><path d="M24 4C12.95 4 4 13.4 4 24.8c0 6.1 2.5 11.55 6.56 15.4.34.3.54.73.55 1.18l.11 3.7a1.5 1.5 0 002.1 1.32l4.12-1.82c.35-.15.74-.18 1.11-.08A21.8 21.8 0 0024 45.6c11.05 0 20-9.4 20-20.8C44 13.4 35.05 4 24 4zm12.34 16.38l-5.84 9.26a3 3 0 01-4.33.8l-4.65-3.48a1.2 1.2 0 00-1.44 0l-6.28 4.76c-.84.63-1.93-.36-1.38-1.26l5.84-9.26a3 3 0 014.33-.8l4.65 3.48a1.2 1.2 0 001.44 0l6.28-4.76c.84-.63 1.93.36 1.38 1.26z"/></svg></span>
+          <span><span class="chat-lbl">Chat Messenger</span><span class="chat-val">Fanpage Tư Vấn Pháp Luật Thực Tế</span></span>
+        </a>
+      </div>
+      <div class="chat-tips">
+        <div class="chat-tip-title">Để được tư vấn nhanh, anh/chị nhắn kèm:</div>
+        <ul>
+          <li>Tình huống đang gặp — 3 đến 5 câu, theo thứ tự thời gian</li>
+          <li>Ảnh chụp giấy tờ liên quan: hợp đồng, thông báo, sổ đỏ, bản án…</li>
+          <li>Mốc thời gian quan trọng: ngày ký, ngày nhận thông báo, ngày xử</li>
+        </ul>
+      </div>
+      <div class="chat-note"><svg width="13" height="13" viewBox="0 0 24 24" fill="#6B7280"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4z"/></svg> Thông tin được bảo mật — chỉ luật sư Quảng An đọc</div>
     </div>
   </div>
 </section>
@@ -851,19 +831,19 @@ footer {
     <a href="blog.html" style="font-family:Inter,sans-serif;font-size:14px;color:#7B1113;font-weight:600;display:flex;align-items:center;gap:6px;">Xem tất cả bài viết →</a>
   </div>
   <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:20px;">
-    <a href="blog.html" style="background:#fff;border:1px solid #E5E7EB;border-radius:12px;padding:24px;display:block;transition:box-shadow .2s,transform .2s;text-decoration:none;" onmouseover="this.style.boxShadow='0 6px 24px rgba(0,0,0,0.09)';this.style.transform='translateY(-3px)'" onmouseout="this.style.boxShadow='';this.style.transform=''">
+    <a href="bi-ngan-hang-goi-len-lam-viec-5-dieu-phai-biet.html" style="background:#fff;border:1px solid #E5E7EB;border-radius:12px;padding:24px;display:block;transition:box-shadow .2s,transform .2s;text-decoration:none;" onmouseover="this.style.boxShadow='0 6px 24px rgba(0,0,0,0.09)';this.style.transform='translateY(-3px)'" onmouseout="this.style.boxShadow='';this.style.transform=''">
       <div style="font-size:10px;color:#7B1113;font-weight:700;letter-spacing:1px;text-transform:uppercase;font-family:Inter,sans-serif;margin-bottom:10px;">Ngân hàng</div>
       <div style="font-family:'Cormorant Garamond',serif;font-size:18px;font-weight:700;color:#3D0708;line-height:1.35;margin-bottom:10px;">Bị ngân hàng gửi giấy triệu tập — 5 điều phải biết trước khi ký</div>
       <div style="font-size:13px;color:#6B7280;line-height:1.65;">Đừng ký bất kỳ văn bản nào trước khi đọc bài này. Quyền phản đối của bạn có thể bị mất vĩnh viễn.</div>
       <div style="font-size:11px;color:#9CA3AF;margin-top:14px;font-family:Inter,sans-serif;">12/04/2026</div>
     </a>
-    <a href="blog.html" style="background:#fff;border:1px solid #E5E7EB;border-radius:12px;padding:24px;display:block;transition:box-shadow .2s,transform .2s;text-decoration:none;" onmouseover="this.style.boxShadow='0 6px 24px rgba(0,0,0,0.09)';this.style.transform='translateY(-3px)'" onmouseout="this.style.boxShadow='';this.style.transform=''">
+    <a href="mua-dat-giay-tay-khong-sang-ten-co-kien-duoc-khong.html" style="background:#fff;border:1px solid #E5E7EB;border-radius:12px;padding:24px;display:block;transition:box-shadow .2s,transform .2s;text-decoration:none;" onmouseover="this.style.boxShadow='0 6px 24px rgba(0,0,0,0.09)';this.style.transform='translateY(-3px)'" onmouseout="this.style.boxShadow='';this.style.transform=''">
       <div style="font-size:10px;color:#7B1113;font-weight:700;letter-spacing:1px;text-transform:uppercase;font-family:Inter,sans-serif;margin-bottom:10px;">Đất đai</div>
       <div style="font-family:'Cormorant Garamond',serif;font-size:18px;font-weight:700;color:#3D0708;line-height:1.35;margin-bottom:10px;">Mua đất giấy tay bên kia không chịu sang tên — kiện được không?</div>
       <div style="font-size:13px;color:#6B7280;line-height:1.65;">Giao dịch giấy tay không công chứng vẫn có thể được tòa công nhận nếu đáp ứng đủ điều kiện.</div>
       <div style="font-size:11px;color:#9CA3AF;margin-top:14px;font-family:Inter,sans-serif;">10/04/2026</div>
     </a>
-    <a href="blog.html" style="background:#fff;border:1px solid #E5E7EB;border-radius:12px;padding:24px;display:block;transition:box-shadow .2s,transform .2s;text-decoration:none;" onmouseover="this.style.boxShadow='0 6px 24px rgba(0,0,0,0.09)';this.style.transform='translateY(-3px)'" onmouseout="this.style.boxShadow='';this.style.transform=''">
+    <a href="ly-hon-don-phuong-khi-vo-chong-khong-dong-y.html" style="background:#fff;border:1px solid #E5E7EB;border-radius:12px;padding:24px;display:block;transition:box-shadow .2s,transform .2s;text-decoration:none;" onmouseover="this.style.boxShadow='0 6px 24px rgba(0,0,0,0.09)';this.style.transform='translateY(-3px)'" onmouseout="this.style.boxShadow='';this.style.transform=''">
       <div style="font-size:10px;color:#7B1113;font-weight:700;letter-spacing:1px;text-transform:uppercase;font-family:Inter,sans-serif;margin-bottom:10px;">Hôn nhân</div>
       <div style="font-family:'Cormorant Garamond',serif;font-size:18px;font-weight:700;color:#3D0708;line-height:1.35;margin-bottom:10px;">Vợ/chồng không chịu ly hôn — có bắt buộc được không?</div>
       <div style="font-size:13px;color:#6B7280;line-height:1.65;">Ly hôn đơn phương hoàn toàn được, dù bên kia không đồng ý. Thủ tục khoảng 4–8 tháng.</div>
@@ -1023,6 +1003,9 @@ footer {
         <a href="https://www.facebook.com/profile.php?id=61588220735976" target="_blank" class="social-btn" title="Facebook">
           <svg viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg>
         </a>
+        <a href="https://m.me/61588220735976" target="_blank" class="social-btn" title="Messenger">
+          <svg viewBox="0 0 24 24"><path d="M12 2C6.36 2 2 6.13 2 11.7c0 2.91 1.19 5.43 3.14 7.17.16.15.26.35.27.57l.05 1.78c.02.57.6.94 1.12.71l1.98-.87c.17-.08.36-.09.53-.04.91.25 1.88.38 2.91.38 5.64 0 10-4.13 10-9.7S17.64 2 12 2zm6.01 7.46l-2.94 4.66a1.5 1.5 0 01-2.17.4l-2.34-1.75a.6.6 0 00-.72 0l-3.16 2.4c-.42.32-.97-.18-.69-.63l2.94-4.66a1.5 1.5 0 012.17-.4l2.34 1.75a.6.6 0 00.72 0l3.16-2.4c.42-.32.97.18.69.63z"/></svg>
+        </a>
         <a href="https://zalo.me/0777801708" class="social-btn" title="Zalo">
           <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 14H9V9h2v7zm4 0h-2V9h2v7z"/></svg>
         </a>
@@ -1042,8 +1025,9 @@ footer {
       <ul>
         <li><a href="tel:0777801708">☎ 0777 801 708</a></li>
         <li><a href="tel:0817017649">☎ 0817 017 649</a></li>
+        <li><a href="https://zalo.me/0777801708" target="_blank">💬 Zalo: 0777 801 708</a></li>
+        <li><a href="https://m.me/61588220735976" target="_blank">💬 Messenger fanpage</a></li>
         <li><a href="#">234 Thành Công, Q. Tân Phú</a></li>
-        <li><a href="/cdn-cgi/l/email-protection#720600131c061a131c1a0115150232151f131b1e5c111d1f"><span class="__cf_email__" data-cfemail="186c6a79766c707976706b7f7f68587f75797174367b7775">[email&#160;protected]</span></a></li>
         <li><a href="#">Thứ 2–6: 8:00–17:30</a></li>
       </ul>
     </div>
@@ -1078,62 +1062,7 @@ footer {
 </div>
 
 <!-- ===== n8n Form Submission Script ===== -->
-<script>
-async function submitToN8n(event) {
-  event.preventDefault();
-  
-  const form = document.getElementById('contactForm');
-  const statusDiv = document.getElementById('formStatus');
-  const submitBtn = form.querySelector('button[type="submit"]');
-  const originalBtnText = submitBtn.textContent;
-  
-  // Disable button & show loading
-  submitBtn.disabled = true;
-  submitBtn.textContent = 'Đang gửi...';
-  statusDiv.textContent = '';
-  statusDiv.style.color = '';
-  
-  // Collect form data into JSON
-  const formData = new FormData(form);
-  const data = {};
-  formData.forEach((value, key) => {
-    data[key] = value;
-  });
-  
-  // n8n Production Webhook URL
-  data.access_key = 'a00fd643-ce8c-476c-90c1-c24dd6f21617'; data.to = 'n.quangan1708@gmail.com'; const WEBHOOK_URL = 'https://api.web3forms.com/submit';
-  
-  try {
-    const response = await fetch(WEBHOOK_URL, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(data)
-    });
-    
-    const result = await response.json(); if (result.success) {
-      statusDiv.style.color = '#15803D';
-      statusDiv.innerHTML = '✓ Đã gửi thành công! Luật sư Quảng An sẽ liên hệ trong 30 phút.';
-      form.reset();
-      // Track conversion (optional - for Google Analytics)
-      if (typeof gtag !== 'undefined') {
-        gtag('event', 'lead_submit', {
-          'event_category': 'engagement',
-          'event_label': data.linh_vuc || 'unknown'
-        });
-      }
-    } else {
-      throw new Error('HTTP ' + response.status);
-    }
-  } catch (err) {
-    console.error('Form submission error:', err);
-    statusDiv.style.color = '#B91C1C';
-    statusDiv.innerHTML = '✗ Có lỗi xảy ra. Vui lòng gọi <a href="tel:0777801708" style="color:#7B1113;text-decoration:underline;">0777 801 708</a> hoặc <a href="https://zalo.me/0777801708" target="_blank" style="color:#7B1113;text-decoration:underline;">nhắn Zalo</a>.';
-  } finally {
-    submitBtn.disabled = false;
-    submitBtn.textContent = originalBtnText;
-  }
-}
-</script>
+
 
 </body>
 </html>
