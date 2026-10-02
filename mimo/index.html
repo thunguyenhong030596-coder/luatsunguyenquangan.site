@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow">
+<meta name="theme-color" content="#14213d">
+<title>MiMo Remote</title>
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="icon-192.png">
+<style>
+:root{--bg:#f4f5f7;--card:#fff;--ink:#14213d;--sub:#5b6474;--line:#dfe3ea;--blue:#1d5fd1;--green:#1f8a4c;--red:#c0392b;--amber:#b7791f;--them:#eef1f6}
+@media (prefers-color-scheme:dark){:root{--bg:#0f141c;--card:#18202c;--ink:#e8edf5;--sub:#9aa6b8;--line:#2a3444;--them:#212b3a}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:18px/1.45 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;padding:0 14px 90px}
+header{position:sticky;top:0;background:var(--bg);padding:12px 0 8px;z-index:2;border-bottom:1px solid var(--line)}
+h1{font-size:20px;margin:0 0 6px}
+#status{font-size:16px}
+.dot{display:inline-block;width:11px;height:11px;border-radius:50%;margin-right:4px}.dot.on{background:var(--green)}.dot.off{background:var(--red)}
+.bar{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-top:8px;font-size:16px}
+.bar label{display:flex;gap:6px;align-items:center}
+.bar input{width:22px;height:22px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:14px;margin:14px 0}
+.card.stale{border-color:var(--amber)}
+.top{display:flex;justify-content:space-between;gap:8px;align-items:center}
+.top b{font-size:19px}
+.chip{font-size:13px;padding:3px 9px;border-radius:999px;background:var(--them);white-space:nowrap}
+.chip.pending{background:#dbe7ff;color:#163d8a}.chip.stale{background:#fde9c8;color:#7a4b00}.chip.sent{background:#d6f2e1;color:#145c33}
+.sub{color:var(--sub);font-size:14px;margin:2px 0 8px}
+.them{background:var(--them);border-radius:12px;padding:8px 11px;margin:6px 0;white-space:pre-wrap;font-size:16px}
+.sent{white-space:pre-wrap;border-left:3px solid var(--green);padding-left:10px;font-size:16px}
+.warn{color:var(--amber);font-size:15px;margin:6px 0}
+textarea{width:100%;min-height:170px;font:inherit;font-size:17px;padding:10px;border-radius:10px;border:1px solid var(--line);background:var(--bg);color:var(--ink);margin-top:6px}
+.row{display:flex;gap:8px;margin-top:8px}
+button{flex:1;font:inherit;font-size:16px;padding:12px 8px;border-radius:12px;border:1px solid var(--line);background:var(--card);color:var(--ink)}
+button:disabled{opacity:.45}
+button.send{background:var(--blue);color:#fff;border-color:var(--blue);font-weight:600;font-size:18px;padding:15px}
+.row.small button{font-size:14px;padding:9px 4px}
+.refine{display:flex;gap:8px;margin-top:8px}.refine input{flex:2;font:inherit;font-size:16px;padding:10px;border-radius:10px;border:1px solid var(--line);background:var(--bg);color:var(--ink)}
+.refine[hidden]{display:none}
+.empty{color:var(--sub);text-align:center;padding:40px 10px}
+.link{background:none;border:none;color:var(--blue);width:100%;padding:14px}
+#toast{position:fixed;left:14px;right:14px;bottom:18px;background:#14213d;color:#fff;padding:13px 15px;border-radius:12px;font-size:16px;opacity:0;transform:translateY(20px);transition:.25s;pointer-events:none}
+#toast.show{opacity:1;transform:none}#toast.err{background:var(--red)}
+</style>
+</head>
+<body>
+<header>
+  <h1>MiMo Remote · Hộp thư Page</h1>
+  <div id="status">Đang tải…</div>
+  <div class="bar">
+    <label><input type="checkbox" id="remoteOn"> Máy tự quét tin mới</label>
+    <button id="bell" style="flex:0 0 auto;padding:8px 12px;font-size:14px">🔔 Bật thông báo</button>
+  </div>
+</header>
+<main id="list"></main>
+<div id="toast"></div>
+<script type="module" src="app.js"></script>
+</body>
+</html>
