@@ -141,7 +141,7 @@ function veBL() {
   else if (!bl || bl.offline) tt = `<div class="warn">Tiện ích bình luận không trả lời: trên máy chưa bật, hoặc chưa tải lại bản 1.6.0.</div>`;
   else {
     const dong = [];
-    if (bl.chanDen && bl.chanDen > Date.now()) dong.push(`<div class="warn">⛔ Facebook đang chặn bình luận — khoá tới ${gio(bl.chanDen)}</div>`);
+    if (bl.chanDen && bl.chanDen > Date.now()) dong.push(`<div class="warn">⛔ MiMo đang tự khoá bình luận tới ${gio(bl.chanDen)}</div><div class="row"><button data-act="blBoKhoa" ${daGoi("bl_bokhoa") ? "disabled" : ""}>🔓 Bỏ khoá chống chặn (Facebook đã hết chặn)</button></div>`);
     dong.push(`<div class="big"><span class="dot ${bl.running ? "on" : "off"}"></span> ${bl.running
       ? (bl.choDen ? `Đang nghỉ — chạy tiếp lúc ${gio(bl.choDen)}` : "Đang chạy")
       : "Đang dừng"}${bl.running && bl.lap ? " · lặp cả ngày" : ""}</div>`);
@@ -167,17 +167,86 @@ function veBL() {
       <div class="sub">${MAIN && MAIN.blGroupsAt ? `Danh sách lúc ${gio(MAIN.blGroupsAt)} · ${ds.length} nhóm, ${soSoi} nhóm sôi nổi (hoạt động ≤ 60 phút)` : "Chưa có danh sách — bấm nút dưới để máy tính quét."}${MAIN && MAIN.blGroupsNote ? `<div class="warn">${esc(MAIN.blGroupsNote)}</div>` : ""}</div>
       <div class="row"><button data-act="blGroups" ${daGoi("bl_groups") ? "disabled" : ""}>🔎 Quét danh sách nhóm</button></div>
       ${ds.length ? `<div class="row small"><button data-act="blSoi">${chiSoi ? "Hiện tất cả nhóm" : "Chỉ hiện nhóm sôi nổi"}</button><button data-act="blChonSoi">Chọn hết nhóm sôi nổi</button><button data-act="blBoChon">Bỏ chọn</button></div>
-      <div>${hien.map((g) => `<label class="grp"><input type="checkbox" data-slug="${esc(g.slug)}" data-ten="${esc(g.ten)}" ${CHON.has(g.slug) ? "checked" : ""}><span class="ten"><b>${MUC[g.muc] || ""} ${esc(g.ten)}</b><span class="sub">Hoạt động ${phutTxt(g.phut)}${g.daQuet ? ' · <span class="ok">đã quét hôm nay</span>' : ""}</span></span></label>`).join("") || `<div class="empty">Không có nhóm sôi nổi.</div>`}</div>
-      <div class="row"><button class="send" data-act="blRunChon" ${CHON.size && !daGoi("bl_start") ? "" : "disabled"}>▶ Chạy ${CHON.size} nhóm đã chọn</button></div>` : ""}
-    </div>`;
+      <div>${hien.map((g) => `<div class="grp"><label class="grpl"><input type="checkbox" data-slug="${esc(g.slug)}" data-ten="${esc(g.ten)}" ${CHON.has(g.slug) ? "checked" : ""}><span class="ten"><b>${MUC[g.muc] || ""} ${esc(g.ten)}</b><span class="sub">Hoạt động ${phutTxt(g.phut)}${g.daQuet ? ' · <span class="ok">đã quét hôm nay</span>' : ""}</span></span></label><button class="mini" data-act="blScan" data-slug="${esc(g.slug)}" data-ten="${esc(g.ten)}" ${daGoi("bl_scan") ? "disabled" : ""}>🔍 Quét &amp; soạn</button></div>`).join("") || `<div class="empty">Không có nhóm sôi nổi.</div>`}</div>
+      <div class="row"><button class="send" data-act="blRunChon" ${CHON.size && !daGoi("bl_start") ? "" : "disabled"}>▶ Chạy ${CHON.size} nhóm đã chọn (tự đăng)</button></div>
+      <div class="hint">"🔍 Quét &amp; soạn" ở từng nhóm: máy quét nhóm đó, soạn bình luận rồi chờ anh duyệt ở mục "Duyệt bình luận" bên dưới — chưa đăng gì cho tới khi anh bấm đăng.</div>` : ""}
+    </div>
+    ${veReview(bl, daGoi)}
+    ${veRp(bl, daGoi)}
+    ${bl && bl.chanLog && bl.chanLog.length ? `<div class="card"><b>📊 Các lần bị khoá gần đây</b><div class="log">${bl.chanLog.map((l) => `${new Date(l.at).toLocaleString("vi-VN", { day: "2-digit", month: "2-digit", hour: "2-digit", minute: "2-digit" })}: ngày ${l.homNay} BL · 1 giờ ${l.motGio} BL — ${esc(l.lyDo)}`).join("\n")}</div></div>` : ""}`;
+}
+// Sửa tạm trên điện thoại (chờ máy tính xác nhận) — giữ lại khi màn hình vẽ lại
+const SUA = {};
+const suaKey = (loai, at, i) => `${loai}:${at}:${i}`;
+function veReview(bl, daGoi) {
+  const rv = bl && bl.review;
+  if (!rv) return "";
+  const ds = (rv.items || []).filter((r) => !r.skipped);
+  const boQua = (rv.items || []).length - ds.length;
+  const choDang = ds.filter((r) => !r.posted && !r.error);
+  return `<div class="card"><b>📝 Duyệt bình luận — ${esc(rv.nhom || "nhóm")}</b>
+    <div class="sub">Lúc ${gio(rv.at)}${rv.trangThai ? " · " + esc(rv.trangThai) : ""}${boQua ? ` · ${boQua} bài đã bình luận trước đó (bỏ qua)` : ""}</div>
+    ${ds.length ? ds.map((r) => {
+      const k = suaKey("rv", rv.at, r.i), o = SUA[k] || {};
+      const duyet = o.approved ?? r.approved, cm = o.comment ?? r.comment;
+      return `<div class="them"><b>${esc(r.author)}</b>${r.posted ? ' <span class="ok">✓ đã đăng</span>' : r.postFailed ? ' <span class="warn">✗ chưa đăng được</span>' : ""}
+        <div class="sub" style="margin:4px 0">${esc((r.text || "").slice(0, 260))}${(r.text || "").length > 260 ? "…" : ""}</div>
+        ${r.posted ? `<div class="sent">${esc(cm)}</div>` : r.error ? `<div class="warn">${esc(cm)}</div>` : `<textarea class="nho" data-rv="${r.i}" data-at="${rv.at}">${esc(cm)}</textarea>
+        <label class="chk"><input type="checkbox" data-rvd="${r.i}" data-at="${rv.at}" ${duyet ? "checked" : ""}> Duyệt đăng bình luận này</label>`}</div>`;
+    }).join("") : `<div class="empty">Chưa có bình luận nào.</div>`}
+    ${choDang.length ? `<div class="row"><button class="send" data-act="blRvPost" ${daGoi("bl_review_post") || rv.dangDang ? "disabled" : ""}>✅ Đăng các bình luận đã duyệt</button></div>
+    <div class="row"><button data-act="blRvAll" ${daGoi("bl_review_all") || rv.dangDang ? "disabled" : ""}>⚡ Duyệt tất cả &amp; gửi</button></div>` : ""}
+  </div>`;
+}
+function veRp(bl, daGoi) {
+  const rp = bl && bl.rp;
+  const ds = rp ? rp.items || [] : [];
+  const can = ds.filter((x) => x.loai === "can_tra_loi");
+  const inbox = ds.filter((x) => x.loai === "xem_inbox");
+  const at = rp ? rp.baoAt || 0 : 0;
+  return `<div class="card"><b>💬 Phản hồi khách (trả lời / tag page trong 48 giờ)</b>
+    ${rp && rp.bao ? `<div class="sub">${esc(rp.bao)}${rp.baoAt ? ` <i>(${truoc(rp.baoAt)})</i>` : ""}</div>` : `<div class="sub">Máy đọc các lượt khách trả lời / tag page, soạn nháp trả lời. Anh duyệt xong mới đăng.</div>`}
+    <div class="row">${rp && rp.running
+      ? `<button data-act="blRpStop" ${daGoi("bl_rp_stop") ? "disabled" : ""}>⏹ Dừng phản hồi khách</button>`
+      : `<button class="send" data-act="blRpStart" ${daGoi("bl_rp_start") ? "disabled" : ""}>💬 Quét & soạn phản hồi khách</button>`}</div>
+    ${can.map((it) => {
+      const k = suaKey("rp", it.href, it.i), o = SUA[k] || {};
+      const duyet = o.duyet ?? it.duyet, rep = o.reply ?? it.reply;
+      return `<div class="them"><b>${esc(it.ten)}</b> <a href="${esc(it.href)}" target="_blank" rel="noopener">mở ↗</a>${it.daDang ? ' <span class="ok">✓ đã đăng</span>' : ""}${it.loiDang ? ` <span class="warn">✗ ${esc(it.loiDang)}</span>` : ""}
+        ${it.goc ? `<div class="sub" style="margin:4px 0">Bình luận của page: ${esc(it.goc.slice(0, 160))}</div>` : ""}
+        <div style="margin:4px 0">“${esc(it.khach)}”</div>
+        ${it.daDang ? `<div class="sent">${esc(rep)}</div>` : `<textarea class="nho" data-rp="${it.i}" data-href="${esc(it.href)}">${esc(rep)}</textarea>
+        <label class="chk"><input type="checkbox" data-rpd="${it.i}" data-href="${esc(it.href)}" ${duyet ? "checked" : ""}> Duyệt đăng trả lời này</label>`}</div>`;
+    }).join("")}
+    ${can.some((x) => !x.daDang) && !(rp && rp.running) ? `<div class="row"><button class="send" data-act="blRpPost" ${daGoi("bl_rp_post") ? "disabled" : ""}>✅ Đăng các trả lời đã duyệt</button></div>` : ""}
+    ${inbox.length ? `<div class="sub" style="margin-top:10px">📥 Khách báo đã nhắn tin — xem hộp thư: ${inbox.map((x) => esc(x.ten)).join(", ")}</div>` : ""}
+  </div>`;
 }
 document.addEventListener("change", (e) => {
   const c = e.target;
+  if (c.dataset && c.dataset.rv !== undefined) {
+    const k = suaKey("rv", +c.dataset.at, +c.dataset.rv); SUA[k] = { ...(SUA[k] || {}), comment: c.value };
+    return lenh("bl_review_set", { i: +c.dataset.rv, comment: c.value }, "Lưu bình luận");
+  }
+  if (c.dataset && c.dataset.rvd !== undefined) {
+    const k = suaKey("rv", +c.dataset.at, +c.dataset.rvd); SUA[k] = { ...(SUA[k] || {}), approved: c.checked };
+    const ta = document.querySelector(`textarea[data-rv="${c.dataset.rvd}"]`);
+    return lenh("bl_review_set", { i: +c.dataset.rvd, approved: c.checked, ...(ta ? { comment: ta.value } : {}) }, c.checked ? "Duyệt" : "Bỏ duyệt");
+  }
+  if (c.dataset && c.dataset.rp !== undefined) {
+    const k = suaKey("rp", c.dataset.href, +c.dataset.rp); SUA[k] = { ...(SUA[k] || {}), reply: c.value };
+    return lenh("bl_rp_set", { i: +c.dataset.rp, reply: c.value }, "Lưu trả lời");
+  }
+  if (c.dataset && c.dataset.rpd !== undefined) {
+    const k = suaKey("rp", c.dataset.href, +c.dataset.rpd); SUA[k] = { ...(SUA[k] || {}), duyet: c.checked };
+    const ta = document.querySelector(`textarea[data-rp="${c.dataset.rpd}"]`);
+    return lenh("bl_rp_set", { i: +c.dataset.rpd, duyet: c.checked, ...(ta ? { reply: ta.value } : {}) }, c.checked ? "Duyệt" : "Bỏ duyệt");
+  }
   if (c.id === "blLap") return localStorage.setItem("mimoBlLap", c.checked ? "1" : "0");
   if (c.dataset && c.dataset.slug) {
     if (c.checked) CHON.set(c.dataset.slug, c.dataset.ten); else CHON.delete(c.dataset.slug);
     const b = document.querySelector('[data-act="blRunChon"]');
-    if (b) { b.textContent = `▶ Chạy ${CHON.size} nhóm đã chọn`; b.disabled = !CHON.size; }
+    if (b) { b.textContent = `▶ Chạy ${CHON.size} nhóm đã chọn (tự đăng)`; b.disabled = !CHON.size; }
   }
 });
 
@@ -285,6 +354,13 @@ document.addEventListener("click", (e) => {
   if (act === "blStop") return lenh("bl_stop", {}, "Dừng bình luận");
   if (act === "blGroups") return lenh("bl_groups", {}, "Quét danh sách nhóm");
   if (act === "blSoi") { chiSoi = !chiSoi; return ve(); }
+  if (act === "blBoKhoa") { if (!confirm("Bỏ khoá chống chặn? Chỉ bấm khi chắc Facebook đã cho bình luận lại.")) return; return lenh("bl_bokhoa", {}, "Bỏ khoá"); }
+  if (act === "blScan") return lenh("bl_scan", { slug: b.dataset.slug, ten: b.dataset.ten }, "Quét nhóm " + b.dataset.ten);
+  if (act === "blRvPost") { if (!confirm("Đăng các bình luận đã duyệt?")) return; return lenh("bl_review_post", {}, "Đăng bình luận đã duyệt"); }
+  if (act === "blRvAll") { if (!confirm("Duyệt TẤT CẢ bình luận trong danh sách và gửi luôn?")) return; return lenh("bl_review_all", {}, "Duyệt tất cả & gửi"); }
+  if (act === "blRpStart") return lenh("bl_rp_start", {}, "Quét phản hồi khách");
+  if (act === "blRpStop") return lenh("bl_rp_stop", {}, "Dừng phản hồi khách");
+  if (act === "blRpPost") { if (!confirm("Đăng các trả lời đã duyệt?")) return; return lenh("bl_rp_post", {}, "Đăng trả lời đã duyệt"); }
   if (act === "blChonSoi") { (MAIN?.blGroups || []).filter((g) => g.muc === "soi").forEach((g) => CHON.set(g.slug, g.ten)); return ve(); }
   if (act === "blBoChon") { CHON.clear(); return ve(); }
   if (act === "blRunChon") {
