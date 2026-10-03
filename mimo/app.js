@@ -58,7 +58,7 @@ async function lenh(type, extra = {}, nhan = "") {
   const id = rid();
   const r = await patch("cmds/" + id, { type, status: "pending", createdAt: Date.now(), ...extra });
   if (!r.ok) return toast("Không gửi được lệnh (mạng?) — thử lại", true);
-  dangCho.set(id, { itemId: extra.itemId, nhan });
+  dangCho.set(id, { itemId: extra.itemId, nhan, loai: type });
   toast(nhan ? nhan + " — chờ máy tính…" : "Đã gửi lệnh, chờ máy tính…");
   ve();
 }
@@ -116,8 +116,74 @@ function veTrangThai() {
   $("#remoteOn").checked = !!MAIN.remoteOn;
 }
 
+// ---------- Tab "Bình luận nhóm" (tiện ích fb-mimo-assistant, đi qua máy tính) ----------
+let TAB = localStorage.getItem("mimoTab") === "bl" ? "bl" : "inbox";
+const CHON = new Map(); // slug → ten
+let chiSoi = false;
+const gio = (ms) => new Date(ms).toLocaleTimeString("vi-VN", { hour: "2-digit", minute: "2-digit" });
+const phutTxt = (p) => (p == null || p < 0 ? "không rõ" : p < 60 ? p + " phút trước" : p < 1440 ? Math.round(p / 60) + " giờ trước" : Math.round(p / 1440) + " ngày trước");
+const MUC = { soi: "🔥", vua: "🙂", it: "💤" };
+function doiTab(t) {
+  TAB = t; localStorage.setItem("mimoTab", t);
+  document.querySelectorAll(".tabs button").forEach((b) => b.classList.toggle("on", b.dataset.tab === t));
+  $("#list").hidden = t !== "inbox"; $("#inboxBar").hidden = t !== "inbox"; $("#blView").hidden = t !== "bl";
+  ve();
+}
+document.querySelectorAll(".tabs button").forEach((b) => b.addEventListener("click", () => doiTab(b.dataset.tab)));
+
+function veBL() {
+  const box = $("#blView");
+  const bl = MAIN && MAIN.bl;
+  const mayOn = MAIN && MAIN.lastSeen && Date.now() - MAIN.lastSeen < 3 * 60 * 1000;
+  const daGoi = (t) => [...dangCho.values()].some((x) => x.loai === t);
+  let tt;
+  if (!mayOn) tt = `<div class="warn">Máy tính offline — lệnh sẽ chạy khi máy bật lại (lệnh quá 10 phút thì bỏ).</div>`;
+  else if (!bl || bl.offline) tt = `<div class="warn">Tiện ích bình luận không trả lời: trên máy chưa bật, hoặc chưa tải lại bản 1.6.0.</div>`;
+  else {
+    const dong = [];
+    if (bl.chanDen && bl.chanDen > Date.now()) dong.push(`<div class="warn">⛔ Facebook đang chặn bình luận — khoá tới ${gio(bl.chanDen)}</div>`);
+    dong.push(`<div class="big"><span class="dot ${bl.running ? "on" : "off"}"></span> ${bl.running
+      ? (bl.choDen ? `Đang nghỉ — chạy tiếp lúc ${gio(bl.choDen)}` : "Đang chạy")
+      : "Đang dừng"}${bl.running && bl.lap ? " · lặp cả ngày" : ""}</div>`);
+    dong.push(`<div>Hôm nay: <b>${bl.daDang || 0}/${bl.tran || 90}</b> bình luận chính${bl.dotThemDaDang ? ` · +${bl.dotThemDaDang} ở đợt thêm` : ""}${bl.dotThemCon ? ` · đợt thêm còn ${bl.dotThemCon}` : ""}</div>`);
+    if (bl.chon && bl.chon.length && bl.running) dong.push(`<div class="sub">Chỉ quét: ${bl.chon.map(esc).join(", ")}</div>`);
+    if (bl.bao) dong.push(`<div class="sub">${esc(bl.bao)}${bl.baoAt ? ` <i>(${truoc(bl.baoAt)})</i>` : ""}</div>`);
+    if (bl.log && bl.log.length) dong.push(`<div class="log">${bl.log.slice().reverse().slice(0, 8).map((g) => `${g.vong > 1 ? "[v" + g.vong + "] " : ""}${esc(g.ten)}: ${g.dang} BL${g.loi ? " · " + g.loi + " lỗi" : ""}`).join("\n")}</div>`);
+    tt = dong.join("");
+  }
+  const lap = localStorage.getItem("mimoBlLap") !== "0";
+  const ds = (MAIN && Array.isArray(MAIN.blGroups) ? MAIN.blGroups : []).slice()
+    .sort((a, b) => (a.phut < 0 ? 1e9 : a.phut) - (b.phut < 0 ? 1e9 : b.phut));
+  const hien = chiSoi ? ds.filter((g) => g.muc === "soi") : ds;
+  const soSoi = ds.filter((g) => g.muc === "soi").length;
+  box.innerHTML = `
+    <div class="card">${tt}
+      <label class="chk"><input type="checkbox" id="blLap" ${lap ? "checked" : ""}> Lặp lại cả ngày (nghỉ giữa vòng, đủ trần thì chạy đợt thêm)</label>
+      <div class="row"><button class="send" data-act="blStart" ${daGoi("bl_start") ? "disabled" : ""}>▶ Chạy tất cả nhóm</button></div>
+      <div class="row"><button data-act="blStop" ${daGoi("bl_stop") ? "disabled" : ""}>⏹ Dừng</button></div>
+    </div>
+    <div class="card">
+      <b>Chọn nhóm để quét</b>
+      <div class="sub">${MAIN && MAIN.blGroupsAt ? `Danh sách lúc ${gio(MAIN.blGroupsAt)} · ${ds.length} nhóm, ${soSoi} nhóm sôi nổi (hoạt động ≤ 60 phút)` : "Chưa có danh sách — bấm nút dưới để máy tính quét."}${MAIN && MAIN.blGroupsNote ? `<div class="warn">${esc(MAIN.blGroupsNote)}</div>` : ""}</div>
+      <div class="row"><button data-act="blGroups" ${daGoi("bl_groups") ? "disabled" : ""}>🔎 Quét danh sách nhóm</button></div>
+      ${ds.length ? `<div class="row small"><button data-act="blSoi">${chiSoi ? "Hiện tất cả nhóm" : "Chỉ hiện nhóm sôi nổi"}</button><button data-act="blChonSoi">Chọn hết nhóm sôi nổi</button><button data-act="blBoChon">Bỏ chọn</button></div>
+      <div>${hien.map((g) => `<label class="grp"><input type="checkbox" data-slug="${esc(g.slug)}" data-ten="${esc(g.ten)}" ${CHON.has(g.slug) ? "checked" : ""}><span class="ten"><b>${MUC[g.muc] || ""} ${esc(g.ten)}</b><span class="sub">Hoạt động ${phutTxt(g.phut)}${g.daQuet ? ' · <span class="ok">đã quét hôm nay</span>' : ""}</span></span></label>`).join("") || `<div class="empty">Không có nhóm sôi nổi.</div>`}</div>
+      <div class="row"><button class="send" data-act="blRunChon" ${CHON.size && !daGoi("bl_start") ? "" : "disabled"}>▶ Chạy ${CHON.size} nhóm đã chọn</button></div>` : ""}
+    </div>`;
+}
+document.addEventListener("change", (e) => {
+  const c = e.target;
+  if (c.id === "blLap") return localStorage.setItem("mimoBlLap", c.checked ? "1" : "0");
+  if (c.dataset && c.dataset.slug) {
+    if (c.checked) CHON.set(c.dataset.slug, c.dataset.ten); else CHON.delete(c.dataset.slug);
+    const b = document.querySelector('[data-act="blRunChon"]');
+    if (b) { b.textContent = `▶ Chạy ${CHON.size} nhóm đã chọn`; b.disabled = !CHON.size; }
+  }
+});
+
 function ve() {
   veTrangThai();
+  if (TAB === "bl") return veBL();
   const canXuLy = (i) => ["new", "pending", "stale", "sending", "scanning", "paid"].includes(i.status);
   const moi = (a, b) => (b.lastAtMs || b.updatedAt || 0) - (a.lastAtMs || a.updatedAt || 0);
   const choDuyet = ITEMS.filter((i) => canXuLy(i) && !daTT(i)).sort(moi);
@@ -214,6 +280,19 @@ document.addEventListener("click", (e) => {
   if (act === "draftAll") return lenh("draftAll", {}, "Đang soạn tất cả");
   if (act === "skip") return lenh("skip", { itemId: id }, "Bỏ qua");
   if (act === "paid") return doiThanhToan(id);
+  const lap = localStorage.getItem("mimoBlLap") !== "0";
+  if (act === "blStart") { if (!confirm("Cho máy tính chạy bình luận TẤT CẢ nhóm?")) return; return lenh("bl_start", { lap }, "Chạy tất cả nhóm"); }
+  if (act === "blStop") return lenh("bl_stop", {}, "Dừng bình luận");
+  if (act === "blGroups") return lenh("bl_groups", {}, "Quét danh sách nhóm");
+  if (act === "blSoi") { chiSoi = !chiSoi; return ve(); }
+  if (act === "blChonSoi") { (MAIN?.blGroups || []).filter((g) => g.muc === "soi").forEach((g) => CHON.set(g.slug, g.ten)); return ve(); }
+  if (act === "blBoChon") { CHON.clear(); return ve(); }
+  if (act === "blRunChon") {
+    const chon = [...CHON].map(([slug, ten]) => ({ slug, ten }));
+    if (!chon.length) return;
+    if (!confirm(`Cho máy tính quét và bình luận ${chon.length} nhóm đã chọn?`)) return;
+    return lenh("bl_start", { chon, lap }, `Chạy ${chon.length} nhóm`);
+  }
 });
 
 async function doiThanhToan(id) {
@@ -301,6 +380,7 @@ function manDangNhap(loi) {
 
 let timer = null;
 async function batDau() {
+  doiTab(TAB);
   if (localStorage.getItem("mimoPush")) $("#bell").textContent = "🔔 Thông báo: đang bật";
   await capNhat();
   if (!timer) {

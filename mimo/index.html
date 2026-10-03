@@ -54,20 +54,28 @@ button.send{background:var(--blue);color:#fff;border-color:var(--blue);font-weig
 .refine[hidden]{display:none}
 .empty{color:var(--sub);text-align:center;padding:40px 10px}
 .link{background:none;border:none;color:var(--blue);width:100%;padding:14px}
+.tabs{display:flex;gap:6px;margin:8px 0 2px}.tabs button{font-size:15px;padding:9px 6px}.tabs button.on{background:var(--ink);color:var(--bg);border-color:var(--ink);font-weight:600}
+.big{font-size:17px;margin:6px 0}.grp{display:flex;gap:10px;align-items:center;padding:10px 4px;border-bottom:1px solid var(--line)}
+.grp input{width:24px;height:24px;flex:0 0 24px}.grp .ten{flex:1;min-width:0}.grp .ten b{font-size:16px;font-weight:600;display:block;overflow-wrap:anywhere}
+.chk{display:flex;gap:10px;align-items:flex-start;margin:12px 0 4px;font-size:15px}.chk input{width:22px;height:22px;flex:0 0 22px;margin:0}
+[hidden]{display:none!important}
+.grp .sub{margin:0;font-size:13px}.ok{color:var(--green)}.log{font-size:14px;color:var(--sub);white-space:pre-line}
 #toast{position:fixed;left:14px;right:14px;bottom:18px;background:#14213d;color:#fff;padding:13px 15px;border-radius:12px;font-size:16px;opacity:0;transform:translateY(20px);transition:.25s;pointer-events:none}
 #toast.show{opacity:1;transform:none}#toast.err{background:var(--red)}
 </style>
 </head>
 <body>
 <header>
-  <h1>MiMo Remote · Hộp thư Page</h1>
+  <h1>MiMo Remote</h1>
+  <nav class="tabs"><button data-tab="inbox">💬 Hộp thư Page</button><button data-tab="bl">📝 Bình luận nhóm</button></nav>
   <div id="status">Đang tải…</div>
-  <div class="bar">
+  <div class="bar" id="inboxBar">
     <label><input type="checkbox" id="remoteOn"> Máy tự quét tin mới</label>
     <button id="bell" style="flex:0 0 auto;padding:8px 12px;font-size:14px">🔔 Bật thông báo</button>
   </div>
 </header>
 <main id="list"></main>
+<main id="blView" hidden></main>
 <div id="toast"></div>
 <script type="module" src="app.js"></script>
 </body>
