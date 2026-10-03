@@ -103,7 +103,7 @@ function truoc(ms) {
   if (s < 86400) return Math.floor(s / 3600) + " giờ trước";
   return Math.floor(s / 86400) + " ngày trước";
 }
-const NHAN = { paid: "Đã thanh toán", pending: "Chờ duyệt", stale: "Khách nhắn thêm", sending: "Đang gửi…", scanning: "Đang quét lại…", sent: "Đã gửi", skipped: "Đã bỏ qua" };
+const NHAN = { new: "Chưa soạn", paid: "Đã thanh toán", pending: "Đã soạn nháp", stale: "Khách nhắn thêm", sending: "Đang gửi…", scanning: "Đang quét lại…", sent: "Đã gửi", skipped: "Đã bỏ qua" };
 
 function veTrangThai() {
   const st = $("#status");
@@ -118,8 +118,8 @@ function veTrangThai() {
 
 function ve() {
   veTrangThai();
-  const canXuLy = (i) => ["pending", "stale", "sending", "scanning", "paid"].includes(i.status);
-  const moi = (a, b) => (b.updatedAt || 0) - (a.updatedAt || 0);
+  const canXuLy = (i) => ["new", "pending", "stale", "sending", "scanning", "paid"].includes(i.status);
+  const moi = (a, b) => (b.lastAtMs || b.updatedAt || 0) - (a.lastAtMs || a.updatedAt || 0);
   const choDuyet = ITEMS.filter((i) => canXuLy(i) && !daTT(i)).sort(moi);
   const khachTT = ITEMS.filter((i) => canXuLy(i) && daTT(i)).sort(moi);
   const cu = ITEMS.filter((i) => !canXuLy(i)).sort(moi);
@@ -130,21 +130,25 @@ function ve() {
     const tt = daTT(it);
     const nhan = tt ? "Đã thanh toán" : NHAN[it.status] || esc(it.status);
     return `<div class="card ${it.status} ${tt ? "tt" : ""}" data-id="${esc(it._id)}">
-      <div class="top">${anh(it)}<div class="ten"><b>${esc(it.contact)}</b><div class="sub">${truoc(it.updatedAt || it.createdAt)}${it.imageCount ? ` · gửi ${it.imageCount} ảnh` : ""}</div></div><span class="chip ${tt ? "paid" : it.status}">${nhan}</span></div>
-      ${(it.theirMsgs || []).map((m) => `<div class="them">${esc(m)}</div>`).join("")}
+      <div class="top">${anh(it)}<div class="ten"><b>${esc(it.contact)}</b><div class="sub">Khách nhắn: ${it.lastAt ? esc(it.lastAt) : truoc(it.updatedAt || it.createdAt)}${it.imageCount ? ` · gửi ${it.imageCount} ảnh` : ""}</div></div><span class="chip ${tt ? "paid" : it.status}">${nhan}</span></div>
+      ${it.myLast ? `<div class="me"><span class="lbl">Anh đã nhắn:</span> ${esc(it.myLast.length > 260 ? it.myLast.slice(0, 260) + "…" : it.myLast)}</div>` : ""}
+      ${(it.theirMsgs || []).length ? `<div class="lbl2">Khách nhắn sau đó (${it.theirMsgs.length} tin):</div>` : ""}
+      ${(it.theirMsgs || []).map((m, i) => `<div class="them"><span class="so">${i + 1}</span>${esc(m)}</div>`).join("")}
       ${it.note && !tt ? `<div class="warn">${esc(it.note)}</div>` : ""}
       ${it.status === "sent"
         ? `<div class="sent">${esc(it.sentText || it.draft)}</div>`
         : tt
         ? `<div class="hint">Khách đã thanh toán — anh tự trả lời trực tiếp.</div>
       <div class="row"><a class="btn send" href="${linkHoiThoai(it)}" target="_blank" rel="noopener">Mở hội thoại để trả lời</a></div>`
+        : !it.draft && it.status !== "scanning"
+        ? `<div class="row"><button class="send" data-act="rescan" ${khoa ? "disabled" : ""}>✍️ Soạn tin</button></div>`
         : `<textarea data-id="${esc(it._id)}" ${khoa ? "disabled" : ""}>${esc(it.draft)}</textarea>
       <div class="row">
         <button class="send" data-act="send" ${khoa || it.status === "stale" || !it.draft ? "disabled" : ""}>${demNguoc[it._id] ? `Huỷ (${demNguoc[it._id].con})` : "Gửi tin này"}</button>
       </div>
       <div class="row">
         <button data-act="refine" ${khoa ? "disabled" : ""}>✏️ Sửa theo góp ý</button>
-        <button data-act="rescan" ${khoa ? "disabled" : ""}>🔄 Quét lại</button>
+        <button data-act="rescan" ${khoa ? "disabled" : ""}>🔄 Soạn lại</button>
       </div>
       <div class="refine" hidden><input placeholder="Góp ý, vd: ngắn hơn, bỏ phần phí"><button data-act="refineGo">Gửi góp ý</button></div>`}
       <div class="row small">
@@ -152,10 +156,12 @@ function ve() {
       </div>
     </div>`;
   };
+  const chuaSoan = choDuyet.filter((i) => i.status === "new").length;
+  const thanhCongCu = `<div class="row tools"><button data-act="readAll">🔎 Quét tin chưa trả lời</button><button data-act="draftAll" ${chuaSoan ? "" : "disabled"}>✍️ Soạn tất cả (${chuaSoan})</button></div>`;
   const muc = (tieuDe, ds) => (ds.length ? `<h2>${tieuDe} (${ds.length})</h2>` + ds.map(the).join("") : "");
-  box.innerHTML =
+  box.innerHTML = thanhCongCu +
     (choDuyet.length || khachTT.length
-      ? muc("Chờ duyệt — chưa thanh toán", choDuyet) + muc("Khách đã thanh toán — anh tự trả lời", khachTT)
+      ? muc("Khách chưa thanh toán", choDuyet) + muc("Khách đã thanh toán — anh tự trả lời", khachTT)
       : `<div class="empty">Không có tin nào chờ xử lý.</div>`) +
     (cu.length ? `<button id="toggleOld" class="link">${hienCu ? "Ẩn" : "Xem"} ${cu.length} tin đã xử lý</button>` + (hienCu ? cu.map(the).join("") : "") : "");
   // Giữ chữ An đã sửa tay, trừ khi máy tính vừa đổi tin nháp (sửa theo góp ý / quét lại)
@@ -203,7 +209,9 @@ document.addEventListener("click", (e) => {
     if (!fb) return toast("Gõ góp ý trước", true);
     return lenh("refine", { itemId: id, feedback: fb, text: card.querySelector("textarea").value }, "Đang sửa tin");
   }
-  if (act === "rescan") return lenh("rescan", { itemId: id }, "Đang quét lại");
+  if (act === "rescan") return lenh("rescan", { itemId: id }, "Đang soạn tin");
+  if (act === "readAll") return lenh("readAll", { max: 15 }, "Đang quét tin chưa trả lời");
+  if (act === "draftAll") return lenh("draftAll", {}, "Đang soạn tất cả");
   if (act === "skip") return lenh("skip", { itemId: id }, "Bỏ qua");
   if (act === "paid") return doiThanhToan(id);
 });
