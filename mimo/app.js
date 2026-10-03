@@ -49,6 +49,7 @@ async function api(url, opts = {}) {
 const getDoc = async (p) => { const r = await api(goc() + (p ? "/" + p : "")); return r.ok ? toObj(r.data) : null; };
 const list = async (c) => { const r = await api(`${goc()}/${c}?pageSize=300`); return r.ok ? (r.data.documents || []).map(toObj) : null; };
 const patch = (p, o) => api(`${goc()}${p ? "/" + p : ""}?` + Object.keys(o).map((k) => "updateMask.fieldPaths=" + encodeURIComponent(k)).join("&"), { method: "PATCH", body: JSON.stringify({ fields: fields(o) }) });
+const del = (p) => api(`${goc()}/${p}`, { method: "DELETE" });
 const rid = () => [...crypto.getRandomValues(new Uint8Array(12))].map((b) => b.toString(16).padStart(2, "0")).join("");
 
 // ---------- Lệnh ----------
@@ -71,7 +72,15 @@ async function theoDoiLenh() {
 }
 
 // ---------- Giao diện ----------
-let MAIN = null, ITEMS = [], hienCu = false;
+let MAIN = null, ITEMS = [], PAID = new Set(), hienCu = false;
+const daTT = (it) => PAID.has(it.threadId || it._id) || it.status === "paid";
+const linkHoiThoai = (it) => `https://business.facebook.com/latest/inbox/all?selected_item_id=${encodeURIComponent(it.threadId || it._id)}&thread_type=${encodeURIComponent(it.threadType || "FB_MESSAGE")}`;
+const chuCai = (t) => esc(String(t || "?").trim().split(/\s+/).pop().charAt(0).toUpperCase() || "?");
+function anh(it) {
+  return it.avatar
+    ? `<img class="av" src="${esc(it.avatar)}" referrerpolicy="no-referrer" alt="" onerror="this.outerHTML='<span class=&quot;av chu&quot;>${chuCai(it.contact)}</span>'">`
+    : `<span class="av chu">${chuCai(it.contact)}</span>`;
+}
 const suaTay = {}; // id → {base: tin nháp gốc, v: chữ đã sửa}
 document.addEventListener("input", (e) => {
   const t = e.target.closest?.("textarea[data-id]");
@@ -94,7 +103,7 @@ function truoc(ms) {
   if (s < 86400) return Math.floor(s / 3600) + " giờ trước";
   return Math.floor(s / 86400) + " ngày trước";
 }
-const NHAN = { pending: "Chờ duyệt", stale: "Khách nhắn thêm", sending: "Đang gửi…", scanning: "Đang quét lại…", sent: "Đã gửi", skipped: "Đã bỏ qua" };
+const NHAN = { paid: "Đã thanh toán", pending: "Chờ duyệt", stale: "Khách nhắn thêm", sending: "Đang gửi…", scanning: "Đang quét lại…", sent: "Đã gửi", skipped: "Đã bỏ qua" };
 
 function veTrangThai() {
   const st = $("#status");
@@ -109,22 +118,29 @@ function veTrangThai() {
 
 function ve() {
   veTrangThai();
-  const dangCan = ITEMS.filter((i) => ["pending", "stale", "sending", "scanning"].includes(i.status)).sort((a, b) => (b.updatedAt || 0) - (a.updatedAt || 0));
-  const cu = ITEMS.filter((i) => !dangCan.includes(i)).sort((a, b) => (b.updatedAt || 0) - (a.updatedAt || 0));
+  const canXuLy = (i) => ["pending", "stale", "sending", "scanning", "paid"].includes(i.status);
+  const moi = (a, b) => (b.updatedAt || 0) - (a.updatedAt || 0);
+  const choDuyet = ITEMS.filter((i) => canXuLy(i) && !daTT(i)).sort(moi);
+  const khachTT = ITEMS.filter((i) => canXuLy(i) && daTT(i)).sort(moi);
+  const cu = ITEMS.filter((i) => !canXuLy(i)).sort(moi);
   const box = $("#list");
   const the = (it) => {
     const daGoi = [...dangCho.values()].some((x) => x.itemId === it._id);
     const khoa = daGoi || ["sending", "scanning"].includes(it.status) || demNguoc[it._id];
-    return `<div class="card ${it.status}" data-id="${esc(it._id)}">
-      <div class="top"><b>${esc(it.contact)}</b><span class="chip ${it.status}">${NHAN[it.status] || esc(it.status)}</span></div>
-      <div class="sub">${truoc(it.updatedAt || it.createdAt)}${it.imageCount ? ` · khách gửi ${it.imageCount} ảnh` : ""}${it.outcome ? ` · ${it.outcome === "paid" ? "Đã CK" : "Không CK"}` : ""}</div>
+    const tt = daTT(it);
+    const nhan = tt ? "Đã thanh toán" : NHAN[it.status] || esc(it.status);
+    return `<div class="card ${it.status} ${tt ? "tt" : ""}" data-id="${esc(it._id)}">
+      <div class="top">${anh(it)}<div class="ten"><b>${esc(it.contact)}</b><div class="sub">${truoc(it.updatedAt || it.createdAt)}${it.imageCount ? ` · gửi ${it.imageCount} ảnh` : ""}</div></div><span class="chip ${tt ? "paid" : it.status}">${nhan}</span></div>
       ${(it.theirMsgs || []).map((m) => `<div class="them">${esc(m)}</div>`).join("")}
-      ${it.note ? `<div class="warn">${esc(it.note)}</div>` : ""}
+      ${it.note && !tt ? `<div class="warn">${esc(it.note)}</div>` : ""}
       ${it.status === "sent"
         ? `<div class="sent">${esc(it.sentText || it.draft)}</div>`
+        : tt
+        ? `<div class="hint">Khách đã thanh toán — anh tự trả lời trực tiếp.</div>
+      <div class="row"><a class="btn send" href="${linkHoiThoai(it)}" target="_blank" rel="noopener">Mở hội thoại để trả lời</a></div>`
         : `<textarea data-id="${esc(it._id)}" ${khoa ? "disabled" : ""}>${esc(it.draft)}</textarea>
       <div class="row">
-        <button class="send" data-act="send" ${khoa || it.status === "stale" ? "disabled" : ""}>${demNguoc[it._id] ? `Huỷ (${demNguoc[it._id].con})` : "Gửi tin này"}</button>
+        <button class="send" data-act="send" ${khoa || it.status === "stale" || !it.draft ? "disabled" : ""}>${demNguoc[it._id] ? `Huỷ (${demNguoc[it._id].con})` : "Gửi tin này"}</button>
       </div>
       <div class="row">
         <button data-act="refine" ${khoa ? "disabled" : ""}>✏️ Sửa theo góp ý</button>
@@ -132,12 +148,15 @@ function ve() {
       </div>
       <div class="refine" hidden><input placeholder="Góp ý, vd: ngắn hơn, bỏ phần phí"><button data-act="refineGo">Gửi góp ý</button></div>`}
       <div class="row small">
-        <button data-act="paid">✓ Đã CK</button><button data-act="notpaid">✗ Không CK</button>${it.status !== "sent" ? `<button data-act="skip">Bỏ qua</button>` : ""}
+        <button data-act="paid" class="${tt ? "on" : ""}">${tt ? "✓ Đã thanh toán (bấm để bỏ)" : "💰 Khách đã thanh toán"}</button>${it.status !== "sent" ? `<button data-act="skip">Xong / Bỏ qua</button>` : ""}
       </div>
     </div>`;
   };
+  const muc = (tieuDe, ds) => (ds.length ? `<h2>${tieuDe} (${ds.length})</h2>` + ds.map(the).join("") : "");
   box.innerHTML =
-    (dangCan.length ? dangCan.map(the).join("") : `<div class="empty">Không có tin nào chờ duyệt.</div>`) +
+    (choDuyet.length || khachTT.length
+      ? muc("Chờ duyệt — chưa thanh toán", choDuyet) + muc("Khách đã thanh toán — anh tự trả lời", khachTT)
+      : `<div class="empty">Không có tin nào chờ xử lý.</div>`) +
     (cu.length ? `<button id="toggleOld" class="link">${hienCu ? "Ẩn" : "Xem"} ${cu.length} tin đã xử lý</button>` + (hienCu ? cu.map(the).join("") : "") : "");
   // Giữ chữ An đã sửa tay, trừ khi máy tính vừa đổi tin nháp (sửa theo góp ý / quét lại)
   box.querySelectorAll("textarea[data-id]").forEach((t) => {
@@ -186,9 +205,29 @@ document.addEventListener("click", (e) => {
   }
   if (act === "rescan") return lenh("rescan", { itemId: id }, "Đang quét lại");
   if (act === "skip") return lenh("skip", { itemId: id }, "Bỏ qua");
-  if (act === "paid") return lenh("outcome", { itemId: id, outcome: "paid" }, "Ghi nhận đã CK");
-  if (act === "notpaid") return lenh("outcome", { itemId: id, outcome: "not_paid" }, "Ghi nhận không CK");
+  if (act === "paid") return doiThanhToan(id);
 });
+
+async function doiThanhToan(id) {
+  const it = ITEMS.find((x) => x._id === id);
+  if (!it) return;
+  const khoa = it.threadId || it._id;
+  if (daTT(it)) {
+    if (!confirm("Bỏ đánh dấu đã thanh toán cho " + it.contact + "?")) return;
+    const r = await del("paid/" + khoa);
+    if (it.status === "paid") await patch("items/" + it._id, { status: "pending", updatedAt: Date.now() });
+    if (!r.ok && r.status !== 404) return toast("Không lưu được (mạng?)", true);
+    PAID.delete(khoa);
+    toast("Đã bỏ đánh dấu thanh toán");
+  } else {
+    const r = await patch("paid/" + khoa, { contact: it.contact || "", threadId: khoa, at: Date.now() });
+    if (!r.ok) return toast("Không lưu được (mạng?)", true);
+    PAID.add(khoa);
+    toast("Đã đánh dấu: " + it.contact + " đã thanh toán. Tin sau của khách này máy sẽ không soạn nháp.");
+    lenh("outcome", { itemId: id, outcome: "paid" }, "Ghi thống kê đã CK"); // ghi vào thống kê chốt khách trên máy tính
+  }
+  ve();
+}
 
 $("#remoteOn").addEventListener("change", async (e) => {
   const on = e.target.checked;
@@ -227,9 +266,10 @@ $("#bell").addEventListener("click", batThongBao);
 // ---------- Vòng cập nhật ----------
 async function capNhat() {
   if (!USER) return;
-  const [m, its] = await Promise.all([getDoc(""), list("items")]);
+  const [m, its, pd] = await Promise.all([getDoc(""), list("items"), list("paid")]);
   if (m) MAIN = m;
   if (its) ITEMS = its;
+  if (pd) PAID = new Set(pd.map((p) => p.threadId || p._id));
   await theoDoiLenh();
   if (!document.querySelector("textarea:focus") && !document.querySelector(".refine:not([hidden]) input:focus")) ve();
   else veTrangThai();
