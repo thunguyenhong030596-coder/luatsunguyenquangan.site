@@ -385,7 +385,7 @@ async function doiThanhToan(id) {
   } else {
     const r = await patch("paid/" + khoa, { contact: it.contact || "", threadId: khoa, at: Date.now() });
     if (!r.ok) return toast("Không lưu được (mạng?)", true);
-    PAID.add(khoa);
+    PAID.add(khoa); lanDocDu = 0;
     toast("Đã đánh dấu: " + it.contact + " đã thanh toán. Tin sau của khách này máy sẽ không soạn nháp.");
     lenh("outcome", { itemId: id, outcome: "paid" }, "Ghi thống kê đã CK"); // ghi vào thống kê chốt khách trên máy tính
   }
@@ -427,11 +427,25 @@ async function batThongBao() {
 $("#bell").addEventListener("click", batThongBao);
 
 // ---------- Vòng cập nhật ----------
+// 4/10/2026: Firestore báo hết hạn mức miễn phí (50.000 lượt đọc/ngày). Trước: mỗi 8 giây đọc lại TOÀN BỘ tin + danh sách
+// đã thanh toán. Nay: đọc đủ 10 phút/lần; giữa chừng chỉ hỏi các tin vừa đổi (updatedAt mới hơn lần trước).
+let lanDocDu = 0, mocMoi = 0;
+async function tinVuaDoi(tu) {
+  const r = await api(`${goc()}:runQuery`, { method: "POST", body: JSON.stringify({ structuredQuery: {
+    from: [{ collectionId: "items" }],
+    where: { fieldFilter: { field: { fieldPath: "updatedAt" }, op: "GREATER_THAN", value: { integerValue: String(tu) } } }, limit: 100 } }) });
+  return r.ok && Array.isArray(r.data) ? r.data.filter((x) => x.document).map((x) => toObj(x.document)) : null;
+}
 async function capNhat() {
   if (!USER) return;
-  const [m, its, pd] = await Promise.all([getDoc(""), list("items"), list("paid")]);
+  const docDu = !lanDocDu || Date.now() - lanDocDu > 10 * 60 * 1000;
+  const [m, its, pd] = await Promise.all([getDoc(""), docDu ? list("items") : tinVuaDoi(mocMoi - 60000), docDu ? list("paid") : null]);
   if (m) MAIN = m;
-  if (its) ITEMS = its;
+  if (its) {
+    if (docDu) { ITEMS = its; lanDocDu = Date.now(); }
+    else for (const it of its) { const k = ITEMS.findIndex((x) => x._id === it._id); if (k >= 0) ITEMS[k] = it; else ITEMS.push(it); }
+    for (const it of its) mocMoi = Math.max(mocMoi, it.updatedAt || 0);
+  }
   if (pd) PAID = new Set(pd.map((p) => p.threadId || p._id));
   await theoDoiLenh();
   if (!document.querySelector("textarea:focus") && !document.querySelector(".refine:not([hidden]) input:focus")) ve();
@@ -460,7 +474,7 @@ async function batDau() {
   if (localStorage.getItem("mimoPush")) $("#bell").textContent = "🔔 Thông báo: đang bật";
   await capNhat();
   if (!timer) {
-    timer = setInterval(() => document.visibilityState === "visible" && capNhat(), 8000);
+    timer = setInterval(() => document.visibilityState === "visible" && capNhat(), 15000);
     document.addEventListener("visibilitychange", () => document.visibilityState === "visible" && capNhat());
   }
 }
