@@ -384,3 +384,9 @@ section{padding:clamp(56px,7vw,96px) 0}
 
 .foot.dark{background:#0E131B;border-top:0;color:#9AA3B2}
 .foot.dark a:hover{color:#fff}
+/* sửa: nút trong khung cuối bài không kế thừa màu link của bài viết */
+.art-body .art-cta a.btn{border-bottom:0}
+.art-body .art-cta a.btn-seal{color:#fff}
+.art-body .art-cta a.btn-seal:hover{color:#fff;background:var(--seal-dark)}
+.art-body .art-cta a.btn-line{color:#fff;border-color:#fff}
+.art-body .art-cta a.btn-line:hover{background:#fff;color:var(--ink)}
