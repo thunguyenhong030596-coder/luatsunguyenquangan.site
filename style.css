@@ -96,14 +96,17 @@ section{padding:clamp(56px,7vw,96px) 0}
 @media (max-width:760px){.sec-head{grid-template-columns:1fr;gap:10px}}
 
 /* vấn đề — rows */
-.issues{border-top:1px solid var(--line)}
-.issue{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1.5fr) auto;gap:16px 40px;padding:26px 0;border-bottom:1px solid var(--line);align-items:start}
+.issues{display:grid;grid-template-columns:repeat(2,1fr);gap:24px}
+.issue{display:grid;grid-template-columns:minmax(0,1fr);border:1px solid var(--line);border-radius:16px;overflow:hidden;background:#fff}
+.issue-img{aspect-ratio:16/7;overflow:hidden;background:var(--stone)}
+.issue-img img{width:100%;height:100%;object-fit:cover;display:block}
+.issue-body{padding:22px 24px 24px;display:grid;gap:10px}
 .issue h3{font-size:21px;line-height:1.3}
 .issue p{font-size:16px;color:var(--ink-2);max-width:none}
 .issue .first{font-weight:600;color:var(--ink)}
 .issue a.more{font-size:14.5px;font-weight:600;color:var(--seal);white-space:nowrap;border-bottom:1.5px solid transparent;padding-bottom:2px}
 .issue a.more:hover{border-color:var(--seal)}
-@media (max-width:760px){.issue{grid-template-columns:1fr;gap:10px;padding:22px 0}}
+@media (max-width:860px){.issues{grid-template-columns:1fr}}
 
 /* quy trình — numbered (a true sequence) */
 .steps{display:grid;grid-template-columns:repeat(4,1fr);gap:0;border:1px solid var(--line);border-radius:14px;overflow:hidden;background:var(--stone)}
@@ -155,6 +158,7 @@ section{padding:clamp(56px,7vw,96px) 0}
 @media (max-width:520px){.rules{grid-template-columns:1fr}}
 
 /* hỏi đáp */
+.sec-faq{background:var(--stone)}
 .faq{border-top:1px solid var(--line)}
 .faq details{border-bottom:1px solid var(--line)}
 .faq summary{list-style:none;cursor:pointer;padding:22px 44px 22px 0;font-family:var(--serif);font-size:21px;font-weight:600;position:relative;line-height:1.3}
@@ -166,7 +170,10 @@ section{padding:clamp(56px,7vw,96px) 0}
 
 /* blog */
 .posts{display:grid;grid-template-columns:repeat(3,1fr);gap:28px}
-.post{display:flex;flex-direction:column;gap:10px;padding-top:18px;border-top:2px solid var(--ink)}
+.post{display:flex;flex-direction:column;gap:10px}
+.post .thumb{display:block;aspect-ratio:3/2;overflow:hidden;border-radius:12px;background:var(--stone);margin-bottom:6px}
+.post .thumb img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .4s}
+.post:hover .thumb img{transform:scale(1.03)}
 .post .cat{font-size:13.5px;font-weight:600;color:var(--seal)}
 .post h3{font-size:20px;line-height:1.3}
 .post h3 a:hover{color:var(--seal)}
@@ -174,6 +181,10 @@ section{padding:clamp(56px,7vw,96px) 0}
 .post .read{margin-top:auto;font-size:14.5px;font-weight:600;color:var(--ink);padding-top:8px}
 .post .read:hover{color:var(--seal)}
 @media (max-width:860px){.posts{grid-template-columns:1fr;gap:22px}}
+
+/* ảnh đầu bài viết */
+.art-cover{margin-top:28px;border-radius:16px;overflow:hidden;aspect-ratio:21/8;background:var(--stone)}
+.art-cover img{width:100%;height:100%;object-fit:cover;display:block}
 
 /* blog page */
 .blog-hero{padding:clamp(40px,6vw,72px) 0 24px}
